@@ -1,0 +1,29 @@
+{
+  "name": "vue-super-form",
+  "description": "Easy form rendering and validation",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "codeandcoding",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeandcoding/vue-super-form.git"
+  },
+  "main": "lib/vue-super-form.js",
+  "module": "lib/vue-super-form.js",
+  "unpkg": "lib/vue-super-form.js",
+  "scripts": {
+    "build": "webpack --progress --colors"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "babel-loader": "^8.0.5",
+    "path": "^0.12.7",
+    "vue-loader": "^15.5.1",
+    "vue-template-compiler": "^2.5.22",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "vue": "^2.5.22"
+  }
+}
