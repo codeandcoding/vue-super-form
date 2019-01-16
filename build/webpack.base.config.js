@@ -2,15 +2,12 @@ const webpack = require('webpack');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+function resolve(dir) {
+    return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
-    mode: 'production',
-    entry: __dirname + '/src/index.js',
-    output: {
-        path: __dirname + '/lib',
-        filename: "vue-super-form.js",
-        library: "vue-super-form",
-        libraryTarget: 'umd'
-    },
+    context: path.resolve(__dirname, '../'),
     module: {
         rules: [
             {
@@ -26,16 +23,12 @@ module.exports = {
     },
     resolve: {
         modules: [
-            path.resolve(__dirname),
-            path.resolve(__dirname, 'node_modules')
+            resolve(''),
+            resolve('node_modules'),
         ],
         extensions: ['.js', '.vue'],
-        alias: {
-            src: path.resolve(__dirname, 'src'),
-            inputs: path.resolve(__dirname, 'src/inputs')
-        },
     },
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
     ]
 };

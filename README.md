@@ -25,3 +25,12 @@ Individual input elements expect the following props:
 | placeholder  | String   |            | No        | A placeholder for the field |
 | validation   | Object   |            | No        | Validation rules (TBD)  |
 | readonly     | Boolean  | false      | No        | Render the field as readonly (ie. disabling input) |
+
+## Development
+
+For development purposes, you can start a hot-reloading development server:
+
+``` bash
+yarn dev
+```
+The example application is now accessible at `localhost:3000`
