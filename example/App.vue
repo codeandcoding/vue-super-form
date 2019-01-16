@@ -1,16 +1,23 @@
 <template>
     <div>
-        <super-select />
+        <super-form :schema="exampleSchema" />
     </div>
 </template>
 
 <script>
-export default {
-    name: 'App',
-    mounted() {
-        console.warn('example app mounted!');
-    }
-};
+    import exampleSchema from './example.json';
+
+    export default {
+        name: 'App',
+        data () {
+            return {
+                exampleSchema,
+            }
+        },
+        mounted() {
+            console.log('example app mounted!');
+        }
+    };
 </script>
 
 <style lang="scss">

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './App';
-import { SuperSelect } from '../src';
+import SuperForm from '../src';
 
-Vue.component('super-select', SuperSelect)
+Vue.component('super-form', SuperForm)
 
 new Vue({
     el: '#app',

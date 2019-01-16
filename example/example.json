@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "title": "Name",
+            "minLength": 3
+        },
+        "age": {
+            "type": "number",
+            "title": "Age",
+            "minimum": 18,
+            "maximum": 60
+        },
+        "checkboxes": {
+            "type": "array",
+            "title": "Multiple choices",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "foo",
+                    "bar",
+                    "fuzz",
+                    "qux"
+                ]
+            },
+            "ui:widget": "checkbox"
+        },
+        "select": {
+            "type": "array",
+            "title": "Choice list",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "foo",
+                    "bar",
+                    "fuzz",
+                    "qux"
+                ]
+            }
+        },
+        "numberSelect": {
+            "type": "number",
+            "title": "Select",
+            "enum": [
+                1,
+                2,
+                3
+            ]
+        },
+        "numberRadio": {
+            "type": "number",
+            "title": "Radio",
+            "enum": [
+                1,
+                2,
+                3
+            ],
+            "ui:widget": "radio"
+        }
+    },
+    "required": ["name", "age"]
+}
+  
