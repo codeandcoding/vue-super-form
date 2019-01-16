@@ -82,8 +82,10 @@
                 }
             },
             getFieldProps(config) {
+                const hasKey = key => Object.prototype.hasOwnProperty.call(config, key);
+                
                 return {
-                    
+                    items: hasKey('items') ? config.items.enum : config.enum,
                 };
             }
         },
