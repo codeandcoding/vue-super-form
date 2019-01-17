@@ -17,11 +17,6 @@
 
     export default {
         name: 'SuperText',
-        data() {
-            return {
-                superText,
-            };
-        },
         props: _.assign({
             id: {
                 String,
