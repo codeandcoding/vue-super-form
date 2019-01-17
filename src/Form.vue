@@ -70,6 +70,10 @@
                         componentName = widget ? this.getWidgetComponent(widget) : componentName;
                         break;
                     case 'string':
+                        if (hasKey('format')) {
+                            componentName = this.getWidgetComponent(config['format']);
+                            break;
+                        }
                         componentName = hasKey('enum') ? 'SuperSelect' : 'SuperText';
                         componentName = widget ? this.getWidgetComponent(widget) : componentName;
                         break;
@@ -95,6 +99,10 @@
             },
             getWidgetComponent(widget) {
                 switch (widget) {
+                    case 'date':
+                    case 'date-time':
+                    case 'time':
+                        return 'SuperDate';
                     case 'radio':
                         return 'SuperRadio';
                     case 'checkbox':
@@ -107,9 +115,10 @@
                 const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
                 
                 return {
-                    type: config.type,
+                    ...config,
                     items: hasKey(config, 'items') ? config.items.enum : config.enum,
                     value: hasKey(this.values, name) ? this.values[name] : null,
+                    label: hasKey(config, 'title') ? config.title : _.capitalize(name),
                 };
             }
         },
@@ -119,8 +128,13 @@
 <style scoped lang="scss">
     .form {
         display: block;
-        
-        > * {
+
+        &__text,
+        &__number,
+        &__select,
+        &__checkboxes,
+        &__checkbox,
+        &__date {
             display: block;
         }
     }

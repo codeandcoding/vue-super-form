@@ -20,7 +20,8 @@
                     numberSelect: 2,
                     checkboxes: [
                         'foo', 'fuzz'
-                    ]
+                    ],
+                    birthdate: '2018/12/01'
                 },
             }
         },
