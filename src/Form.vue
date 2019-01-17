@@ -115,8 +115,9 @@
                         return 'SuperText';
                 }
             },
-            getFieldProps(name, config) {
+            getFieldProps(name, conf) {
                 const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
+                const config = _.clone(conf);
                 
                 // get ui props
                 const uiProps = {};
