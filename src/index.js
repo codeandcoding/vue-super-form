@@ -2,7 +2,7 @@ import SuperForm from './Form';
 import SuperText from './inputs/Text';
 import SuperSelect from './inputs/Select';
 import SuperCheckbox from './inputs/Checkbox';
-import SuperRadio from './Inputs/Radio';
+import SuperRadio from './inputs/Radio';
 
 export {
     SuperText,
