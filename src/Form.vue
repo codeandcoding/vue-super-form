@@ -76,8 +76,10 @@
                     case 'array':
                         componentName = widget ? this.getWidgetComponent(widget) : 'SuperSelect';
                         break;
-                    case 'null':
                     case 'boolean':
+                        componentName = 'SuperCheckbox';
+                        break;
+                    case 'null':
                     case 'object':
                     case 'integer':
                     default:
