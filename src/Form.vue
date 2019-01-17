@@ -25,6 +25,10 @@
                 type: Object,
                 required: true,
             },
+            translations: {
+                type: Object,
+                required: false,
+            },
             value: {},
         },
         data() {
