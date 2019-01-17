@@ -1,17 +1,19 @@
 <template>
     <div class="text">
-        <label>{{ label }}</label>
-        <input :type="type" 
-        v-model="superText"
-        :id="id" 
-        :placeholder="placeholder"
-        :name="name" 
-        :value="value"/> 
+        <label>{{ this.label }}</label>
+        <input v-model="superText"
+        :type="this.type" 
+        :id="this.id" 
+        :placeholder="this.placeholder"
+        :name="this.name" 
+        :value="this.value"/> 
     </div>
 </template>
 
 <script>
     import Vue from 'vue';
+    import _ from 'lodash';
+    import inputProps from '../inputProps';
 
     export default {
         name: 'SuperText',
@@ -20,21 +22,10 @@
                 superText,
             };
         },
-        props: {
-            placeholder: { 
-                String,
-            },
-            label: {
-                String,
-                required: false
-            },
-            name: {
-                String,
-                required: false
-            },
+        props: _.assign({
             id: {
                 String,
-                required: true
+                required: false
             }, 
             value: {
                 String,
@@ -46,7 +37,7 @@
                     return ['text', 'password'].indexOf(value) !== -1
                 }
             }
-        },
+        }, inputProps),
     }
 </script>
 
