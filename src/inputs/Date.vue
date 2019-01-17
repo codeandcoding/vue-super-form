@@ -1,12 +1,17 @@
 <template>
     <div>
-        Date
+        <input 
+            type="date" 
+            :value="dateValue"
+            v-on:input="e => this.$emit('onChange', this.name, e.target.value)" />
+        <!-- TODO: add fallback for IE -->
     </div>
 </template>
 
 <script>
     import Vue from 'vue';
     import _ from 'lodash';
+    import moment from 'moment';
     import inputProps from '../inputProps';
 
     export default {
@@ -18,6 +23,11 @@
                 default: 'date',
             },
         }, inputProps),
+        computed: {
+            dateValue() {
+                return moment(this.value).format('YYYY-MM-DD');
+            }
+        },
     }
 </script>
 

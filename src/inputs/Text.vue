@@ -24,7 +24,7 @@
             }, 
             type: {
                 // The value must match one of these strings
-                validator: (value) => ['text', 'password'].indexOf(value) !== -1,
+                validator: value => ['text', 'password'].indexOf(value) !== -1,
             }
         }, inputProps),
     }
