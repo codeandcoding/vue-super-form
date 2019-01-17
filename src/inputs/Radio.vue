@@ -21,7 +21,7 @@
         props: _.assign({
             items: {
                 type: Array,
-                required: false,
+                required: true,
             },
         }, inputProps),
 

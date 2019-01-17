@@ -20,7 +20,8 @@
                     numberSelect: 2,
                     checkboxes: [
                         'foo', 'fuzz'
-                    ]
+                    ],
+                    numberRadio: null
                 },
             }
         },
