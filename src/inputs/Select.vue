@@ -1,13 +1,16 @@
 <template>
-    <select :name="name" v-on:input="e => this.onChange(e.target.value)">
-        <option
-            v-for="option in selectItems" 
-            :key="option.value"
-            :selected="option.value == value"
-            :disabled="option.value == null">
-        {{ option.label }}
-        </option>
-    </select>
+    <label class="form__select">
+        <span>{{ this.label }}</span>
+        <select :name="name" v-on:input="e => this.onChange(e.target.value)">
+            <option
+                v-for="option in selectItems"
+                :key="option.value"
+                :selected="option.value == value"
+                :disabled="option.value == null">
+            {{ option.label }}
+            </option>
+        </select>
+    </label>
 </template>
 
 <script>
