@@ -127,7 +127,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .form {
         display: block;
 
@@ -138,6 +138,25 @@
         &__checkbox,
         &__date {
             display: block;
+            margin: 1em 0;
         }
+
+        &__checkboxes {
+            label > span {
+                display: inline;
+            }
+
+            > span {
+                display: block;
+            }
+        }
+
+        &__checkbox > span {
+            display: inline;
+        }
+    }
+
+    label > span {
+        display: block;
     }
 </style>
