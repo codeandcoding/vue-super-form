@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span>Super form.</span>
+        <h1 class="form__title">{{ this.title }}</h1>
         <form class="form">
             <component
                 v-for="field in fields" 
@@ -42,6 +42,9 @@
             fields() {
                 const fields = this.schema.properties;
                 return Object.keys(fields).map(field => this.getFieldConfig(field, fields[field]));
+            },
+            title() {
+                return this.schema.title;
             }
         },
         methods: {
