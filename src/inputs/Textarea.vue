@@ -1,15 +1,16 @@
 <template>
-    <div class="textarea">
-        <label>{{ this.label }}</label>
-        <textarea v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
-        :value="this.value"
-        :id="this.id"
-        :rows="this.rows"
-        :cols="this.cols"
-        :disabled="this.disabled"
-        :name="this.name"
-        :readonly="this.readonly"></textarea> 
-    </div>
+    <label>
+        {{ this.label }}
+        <textarea 
+            v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
+            :value="this.value"
+            :id="this.id"
+            :rows="this.rows"
+            :cols="this.cols"
+            :name="this.name"
+            :readonly="this.readonly">
+        </textarea> 
+    </label>
 </template>
 
 <script>
