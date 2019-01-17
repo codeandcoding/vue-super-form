@@ -17,6 +17,7 @@
                 exampleSchema,
                 formData: {
                     name: 'John Doe',
+                    numberSelect: 2,
                 },
             }
         },

@@ -1,6 +1,12 @@
 <template>
-    <select name="month" v-on:input="e => this.$emit('onChange', this.name, e.target.value)">
-        <option v-for="option in items" :key="option">{{ option }}</option>
+    <select :name="name" v-on:input="e => this.onChange(e.target.value)">
+        <option
+            v-for="option in selectItems" 
+            :key="option.value"
+            :selected="option.value == value"
+            :disabled="option.value == null">
+        {{ option.label }}
+        </option>
     </select>
 </template>
 
@@ -16,7 +22,32 @@
                 type: Array,
                 required: true,
             },
+            type: {
+                type: String,
+                required: false,
+                default: 'string',
+            },
         }, inputProps),
+        computed: {
+            selectItems() {
+                const items = this.items.map(item => ({
+                    value: item,
+                    label: item,
+                }));
+
+                // add default item
+                return _.concat({
+                    value: null,
+                    label: 'Choose one',
+                }, items);
+            }
+        },
+        methods: {
+            onChange(val) {
+                const value = this.type === 'number' ? parseInt(val) : val;
+                this.$emit('onChange', this.name, value);
+            }
+        }
     }
 </script>
 

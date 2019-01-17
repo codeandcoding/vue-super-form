@@ -3,6 +3,7 @@ export default {
         type: String,
         required: true,
     },
+    value: {},
     label: {
         type: String,
         required: false,

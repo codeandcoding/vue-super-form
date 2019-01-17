@@ -61,21 +61,21 @@
 
                 let componentName;
                 switch (config.type) {
-                    case "number":
+                    case 'number':
                         componentName = hasKey('enum') ? 'SuperSelect' : 'SuperNumber';
                         componentName = widget ? this.getWidgetComponent(widget) : componentName;
                         break;
-                    case "string":
+                    case 'string':
                         componentName = hasKey('enum') ? 'SuperSelect' : 'SuperText';
                         componentName = widget ? this.getWidgetComponent(widget) : componentName;
                         break;
-                    case "array":
+                    case 'array':
                         componentName = widget ? this.getWidgetComponent(widget) : 'SuperSelect';
                         break;
-                    case "null":
-                    case "boolean":
-                    case "object":
-                    case "integer":
+                    case 'null':
+                    case 'boolean':
+                    case 'object':
+                    case 'integer':
                     default:
                         componentName = 'SuperText';
                 }
@@ -101,8 +101,9 @@
                 const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
                 
                 return {
+                    type: config.type,
                     items: hasKey(config, 'items') ? config.items.enum : config.enum,
-                    'value': hasKey(this.values, name) ? this.values[name] : null,
+                    value: hasKey(this.values, name) ? this.values[name] : null,
                 };
             }
         },
