@@ -81,7 +81,7 @@
                         componentName = widget ? this.getWidgetComponent(widget) : 'SuperSelect';
                         break;
                     case 'boolean':
-                        componentName = 'SuperCheckbox';
+                        componentName = widget ? this.getWidgetComponent(widget) : 'SuperCheckbox';
                         break;
                     case 'null':
                     case 'object':
@@ -103,6 +103,8 @@
                     case 'date-time':
                     case 'time':
                         return 'SuperDate';
+                    case 'switch':
+                        return 'SuperSwitch';
                     case 'radio':
                         return 'SuperRadio';
                     case 'checkbox':
