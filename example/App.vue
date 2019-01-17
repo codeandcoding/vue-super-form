@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <super-form :schema="exampleSchema" v-model="formData" />
+    <div class="wrapper">
         <pre>
             {{ formData }}
         </pre>
+        <super-form :schema="exampleSchema" v-model="formData" />
     </div>
 </template>
 
@@ -32,5 +32,26 @@
     };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+        overflow: hidden;
+
+        > * {
+            flex: 1;
+        }
+
+        > pre {
+            flex: 0.5;
+        }
+
+        > div {
+            overflow: auto;
+        }
+    }
 </style>

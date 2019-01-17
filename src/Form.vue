@@ -157,26 +157,36 @@
         &__radios,
         &__date {
             display: block;
-            margin: 1em 0;
-        }
+            margin: 2em 0;
 
-        &__checkboxes,
-        &__radios {
-            label > span {
-                display: inline;
+            &:first-child {
+                margin-top: 0;
             }
 
             > span {
                 display: block;
+                padding-bottom: 0.5em;
+            }
+
+            label > span {
+                display: inline;
             }
         }
 
         &__checkbox > span {
             display: inline;
+            padding-bottom: 0;
         }
     }
 
-    label > span {
-        display: block;
+    fieldset {
+        border: 0;
+        padding: 0;
+
+        > label {
+            &:not(:last-child) {
+                padding-right: 1em;
+            }
+        }
     }
 </style>

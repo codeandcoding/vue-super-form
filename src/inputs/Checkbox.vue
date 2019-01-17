@@ -2,14 +2,16 @@
     <div v-if="items" class="form__checkboxes">
         <!-- multiple checkboxes -->
         <span>{{ this.label }}</span>
-        <label v-for="item in selectItems" :key="item.value">
-            <input
-                type="checkbox"
-                :name="name"
-                :checked="value.includes(item.value)"
-                v-on:input="e => onChange(item.value, e.target.checked)" />
-            <span>{{ item.label }}</span>
-        </label>
+        <fieldset>
+            <label v-for="item in selectItems" :key="item.value">
+                <input
+                    type="checkbox"
+                    :name="name"
+                    :checked="value.includes(item.value)"
+                    v-on:input="e => onChange(item.value, e.target.checked)" />
+                <span>{{ item.label }}</span>
+            </label>
+        </fieldset>
     </div>
     <label v-else class="form__checkbox">
         <!-- single checkbox -->

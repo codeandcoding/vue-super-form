@@ -1,15 +1,17 @@
 <template>
     <div class="form__radios">
         <span>{{ this.label }}</span>
-        <label v-for="item in selectItems" :key="item.value">
-            <input
-                type="radio"
-                :name="name"
-                :id="item.label"
-                :checked="value == item.value"
-                v-on:input="e => onChange(item.value)" />
-            <span>{{ item.label }}</span>
-        </label>
+        <fieldset>
+            <label v-for="item in selectItems" :key="item.value">
+                <input
+                    type="radio"
+                    :name="name"
+                    :id="item.label"
+                    :checked="value == item.value"
+                    v-on:input="e => onChange(item.value)" />
+                <span>{{ item.label }}</span>
+            </label>
+        </fieldset>
     </div>
 </template>
 
