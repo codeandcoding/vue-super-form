@@ -109,6 +109,8 @@
                         return 'SuperRadio';
                     case 'checkbox':
                         return 'SuperCheckbox';
+                    case 'textarea':
+                        return 'SuperTextarea';
                     default:
                         return 'SuperText';
                 }

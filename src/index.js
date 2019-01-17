@@ -4,6 +4,7 @@ import SuperSelect from './inputs/Select';
 import SuperCheckbox from './inputs/Checkbox';
 import SuperDate from './inputs/Date';
 import SuperNumber from './inputs/Number';
+import SuperTextarea from './inputs/Textarea';
 
 export {
     SuperText,
@@ -11,6 +12,7 @@ export {
     SuperCheckbox,
     SuperDate,
     SuperNumber,
+    SuperTextarea,
 };
 
 export default SuperForm;
