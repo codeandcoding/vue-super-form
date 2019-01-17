@@ -21,7 +21,7 @@
                     checkboxes: [
                         'foo', 'fuzz'
                     ],
-                    numberRadio: null,
+                    numberRadio: 1,
                     birthdate: '2018/12/01'
                 },
             }

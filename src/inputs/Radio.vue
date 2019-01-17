@@ -3,7 +3,8 @@
         <label v-for="item in selectItems" :key="item.value">
             <input
                 type="radio"
-                :name="item.label"
+                :name="name"
+                :id="item.label"
                 v-on:input="e => onChange(item.value)" />
             <span>{{ item.label }}</span>
         </label>
@@ -26,7 +27,7 @@
         }, inputProps),
 
         computed: {
-            selectItems() {               
+            selectItems() {
                 return this.items.map(item => ({
                     value: item,
                     label: item,
