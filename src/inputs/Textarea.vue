@@ -1,12 +1,11 @@
 <template>
-    <label>
-        {{ this.label }}
-        <textarea 
-            v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
+    <label class="form__textarea">
+        <span>{{ this.label }}</span>
+        <textarea
+            v-on:input="e => this.$emit('onChange', this.name, e.target.value)"
             :value="this.value"
             :id="this.id"
-            :rows="this.rows"
-            :cols="this.cols"
+            :rows="this.height"
             :name="this.name"
             :readonly="this.readonly">
         </textarea> 
@@ -23,17 +22,20 @@
         props: _.assign({
             id: {
                 String,
-                required: false
-            }, 
-            rows: {
-                Number,
-                required: false
+                required: false,
             },
-            cols: {
-                Number,
-                required: false
+            ui: {
+                Object,
+                required: false,
             },
         }, inputProps),
+        computed: {
+            height() {
+                return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'height') ? 
+                    this.ui.height : 
+                    3;
+            }
+        }
     }
 </script>
 

@@ -73,12 +73,11 @@
             "title": "Birthdate",
             "format": "date"
         },
-        "comment": {
+        "comments": {
             "type": "string",
-            "title": "comment",
+            "title": "Comments",
             "ui:widget": "textarea",
-            "cols": 20,
-            "rows": 3       
+            "ui:height": 5     
         }
     },
     "required": ["name", "age"]

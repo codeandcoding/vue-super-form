@@ -118,11 +118,22 @@
             getFieldProps(name, config) {
                 const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
                 
+                // get ui props
+                const uiProps = {};
+                Object.keys(config).map((key) => {
+                    if (key.includes('ui:')) {
+                        const val = config[key];
+                        delete config[key];
+                        uiProps[key.split(':')[1]] = val;
+                    }
+                });
+                
                 return {
                     ...config,
                     items: hasKey(config, 'items') ? config.items.enum : config.enum,
                     value: hasKey(this.values, name) ? this.values[name] : null,
                     label: hasKey(config, 'title') ? config.title : _.capitalize(name),
+                    ui: uiProps,
                 };
             }
         },
@@ -135,6 +146,7 @@
 
         &__text,
         &__number,
+        &__textarea,
         &__select,
         &__checkboxes,
         &__checkbox,
