@@ -1,5 +1,5 @@
 <template>
-    <select name="month">
+    <select name="month" v-on:input="e => this.$emit('onChange', this.name, e.target.value)">
         <option v-for="option in items" :key="option">{{ option }}</option>
     </select>
 </template>
