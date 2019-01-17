@@ -1,17 +1,21 @@
 <template>
-    <form>
-        Super form.
-        <component 
-            v-for="field in fields" 
-            :key="field.key"
-            :is="field.component"
-            v-bind="field.props">
-        </component>
-    </form>
+    <div>
+        <span>Super form.</span>
+        <form class="form">
+            <component
+                v-for="field in fields" 
+                :key="field.key"
+                :is="field.component"
+                v-on:onChange="onChange"
+                v-bind="field.props">
+            </component>
+        </form>
+    </div>
 </template>
 
 <script>
     import Vue from 'vue';
+    import _ from 'lodash';
     import * as inputs from './';
 
     export default {
@@ -21,6 +25,14 @@
                 type: Object,
                 required: true,
             },
+            value: {},
+        },
+        data() {
+            return {
+                values: {
+                    ...this.value,
+                },
+            };
         },
         computed: {
             fields() {
@@ -29,13 +41,17 @@
             }
         },
         methods: {
+            onChange(name, val) {
+                this.values[name] = val;
+                this.$emit('input', _.clone(this.values))
+            },
             getFieldConfig(name, config) {
                 return {
                     key: name,
                     component: this.getFieldComponent(config),
                     props: {
                         name,
-                        ...this.getFieldProps(config),
+                        ...this.getFieldProps(name, config),
                     },
                 };
             },
@@ -81,16 +97,24 @@
                         return 'SuperText';
                 }
             },
-            getFieldProps(config) {
-                const hasKey = key => Object.prototype.hasOwnProperty.call(config, key);
+            getFieldProps(name, config) {
+                const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
                 
                 return {
-                    items: hasKey('items') ? config.items.enum : config.enum,
+                    items: hasKey(config, 'items') ? config.items.enum : config.enum,
+                    'value': hasKey(this.values, name) ? this.values[name] : null,
                 };
             }
         },
     }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+    .form {
+        display: block;
+        
+        > * {
+            display: block;
+        }
+    }
 </style>

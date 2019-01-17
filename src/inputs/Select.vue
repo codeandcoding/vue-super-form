@@ -11,12 +11,12 @@
 
     export default {
         name: 'SuperSelect',
-        props: _.assign(inputProps, {
+        props: _.assign({
             items: {
                 type: Array,
                 required: true,
             },
-        }),
+        }, inputProps),
     }
 </script>
 

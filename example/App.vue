@@ -1,6 +1,9 @@
 <template>
     <div>
-        <super-form :schema="exampleSchema" />
+        <super-form :schema="exampleSchema" v-model="formData" />
+        <pre>
+            {{ formData }}
+        </pre>
     </div>
 </template>
 
@@ -12,6 +15,9 @@
         data () {
             return {
                 exampleSchema,
+                formData: {
+                    name: 'John Doe',
+                },
             }
         },
         mounted() {
