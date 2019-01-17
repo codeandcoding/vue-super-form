@@ -23,10 +23,8 @@
                 required: false
             }, 
             type: {
-                validator: function (value) {
-                    // The value must match one of these strings
-                    return ['text', 'password'].indexOf(value) !== -1
-                }
+                // The value must match one of these strings
+                validator: (value) => ['text', 'password'].indexOf(value) !== -1,
             }
         }, inputProps),
     }
