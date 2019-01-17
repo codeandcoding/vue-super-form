@@ -1,12 +1,12 @@
 <template>
     <div class="text">
         <label>{{ this.label }}</label>
-        <input v-model="superText"
+        <input v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
+        :value="this.value"
         :type="this.type" 
         :id="this.id" 
         :placeholder="this.placeholder"
-        :name="this.name" 
-        :value="this.value"/> 
+        :name="this.name"/> 
     </div>
 </template>
 
@@ -27,10 +27,6 @@
                 String,
                 required: false
             }, 
-            value: {
-                String,
-                required: false
-            },
             type: {
                 validator: function (value) {
                     // The value must match one of these strings
