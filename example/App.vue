@@ -18,6 +18,9 @@
                 formData: {
                     name: 'John Doe',
                     numberSelect: 2,
+                    checkboxes: [
+                        'foo', 'fuzz'
+                    ]
                 },
             }
         },
