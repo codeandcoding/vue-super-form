@@ -1,13 +1,14 @@
 <template>
-    <div class="text">
-        <label>{{ this.label }}</label>
-        <input v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
-        :value="this.value"
-        :type="this.type" 
-        :id="this.id" 
-        :placeholder="this.placeholder"
-        :name="this.name"/> 
-    </div>
+    <label class="form__text">
+        <span>{{ this.label }}</span>
+        <input 
+            v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
+            :value="this.value"
+            :type="this.type" 
+            :id="this.id" 
+            :placeholder="this.placeholder"
+            :name="this.name" />
+    </label>
 </template>
 
 <script>

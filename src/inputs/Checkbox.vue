@@ -1,6 +1,7 @@
 <template>
-    <div v-if="items">
+    <div v-if="items" class="form__checkboxes">
         <!-- multiple checkboxes -->
+        <span>{{ this.label }}</span>
         <label v-for="item in selectItems" :key="item.value">
             <input
                 type="checkbox"
@@ -10,15 +11,14 @@
             <span>{{ item.label }}</span>
         </label>
     </div>
-    <div v-else>
+    <label v-else class="form__checkbox">
         <!-- single checkbox -->
-        <label>
-            <input 
-                type="checkbox" 
-                :name="name" 
-                v-on:input="e => onChange(null, e.target.checked)" />
-        </label>
-    </div>
+        <input 
+            type="checkbox" 
+            :name="name" 
+            v-on:input="e => onChange(null, e.target.checked)" />
+        <span>{{ this.label }}</span>
+    </label>
 </template>
 
 <script>

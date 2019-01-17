@@ -1,11 +1,12 @@
 <template>
-    <div>
+    <label class="form__date">
+        <span>{{ this.label }}</span>
         <input 
             type="date" 
             :value="dateValue"
             v-on:input="e => this.$emit('onChange', this.name, e.target.value)" />
         <!-- TODO: add fallback for IE -->
-    </div>
+    </label>
 </template>
 
 <script>

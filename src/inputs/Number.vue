@@ -1,6 +1,6 @@
 <template>
-    <div class="number">
-        <label>{{ this.label }}</label>
+    <label class="form__number">
+        <span>{{ this.label }}</span>
         <input 
             type="number" 
             v-on:input="e => this.$emit('onChange', this.name, e.target.value)"
@@ -10,8 +10,8 @@
             :name="this.name"
             :min="this.minimum"
             :max="this.maximum"
-            :readonly="this.readonly" /> 
-    </div>
+            :readonly="this.readonly" />
+    </label>
 </template>
 
 <script>

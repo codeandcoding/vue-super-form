@@ -118,6 +118,7 @@
                     ...config,
                     items: hasKey(config, 'items') ? config.items.enum : config.enum,
                     value: hasKey(this.values, name) ? this.values[name] : null,
+                    label: hasKey(config, 'title') ? config.title : _.capitalize(name),
                 };
             }
         },
@@ -127,8 +128,13 @@
 <style scoped lang="scss">
     .form {
         display: block;
-        
-        > * {
+
+        &__text,
+        &__number,
+        &__select,
+        &__checkboxes,
+        &__checkbox,
+        &__date {
             display: block;
         }
     }
