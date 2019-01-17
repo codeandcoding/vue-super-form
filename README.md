@@ -14,6 +14,7 @@ The form expects the following props:
 | ------------ | -------  | ---------- | --------- | ----------- |
 | schema       | Object   |            | Yes       | A JSON schema, defining the form's fields. It should conform to [JSON schema definitions](http://json-schema.org/latest/json-schema-validation.html). |
 | translations | Object   |            | No        |   |
+
 <small>You can pass a `v-model` prop to the form for two-way data binding</small>
 
 Or use individual input elements:
@@ -32,6 +33,7 @@ Individual input elements expect the following props:
 | placeholder  | String   |            | No        | A placeholder for the field |
 | validation   | Object   |            | No        | Validation rules (TBD)  |
 | readonly     | Boolean  | false      | No        | Render the field as readonly (ie. disabling input) |
+
 <small>Individual components accept a `value` prop, and emit a custom `onChange` event on change.</small>
 
 ## Development
