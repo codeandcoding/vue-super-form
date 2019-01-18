@@ -1,9 +1,10 @@
 <template>
     <div>
-        <span>Super form.</span>
+        <h1 class="form__title">{{ this.title }}</h1>
         <form class="form">
             <component
-                v-for="field in fields" 
+                v-for="field in fields"
+                ref="fields"
                 :key="field.key"
                 :is="field.component"
                 v-on:onChange="onChange"
@@ -16,7 +17,7 @@
 <script>
     import Vue from 'vue';
     import _ from 'lodash';
-    import * as inputs from './';
+    import { getFieldConfig, getFieldProps } from './schemaHelper';
 
     export default {
         name: 'SuperForm',
@@ -41,101 +42,36 @@
         computed: {
             fields() {
                 const fields = this.schema.properties;
-                return Object.keys(fields).map(field => this.getFieldConfig(field, fields[field]));
-            }
+                return Object.keys(fields).map((name) => {
+                    const config = fields[name];
+
+                    // add 'required' rule
+                    if (this.schema.required.includes(name)) {
+                        config.required = true;
+                    }
+                    
+                    const props = getFieldProps(name, config, this.values, this.translations);
+                    return getFieldConfig(name, config, props);
+                });
+            },
+            title() {
+                return this.schema.title;
+            },
         },
         methods: {
             onChange(name, val) {
                 this.values[name] = val;
                 this.$emit('input', _.clone(this.values))
             },
-            getFieldConfig(name, config) {
-                return {
-                    key: name,
-                    component: this.getFieldComponent(config),
-                    props: {
-                        name,
-                        ...this.getFieldProps(name, config),
-                    },
-                };
-            },
-            getFieldComponent(config) {
-                const widget = config['ui:widget'];
-                const hasKey = key => Object.prototype.hasOwnProperty.call(config, key);
-
-                let componentName;
-                switch (config.type) {
-                    case 'number':
-                        componentName = hasKey('enum') ? 'SuperSelect' : 'SuperNumber';
-                        componentName = widget ? this.getWidgetComponent(widget) : componentName;
-                        break;
-                    case 'string':
-                        if (hasKey('format')) {
-                            componentName = this.getWidgetComponent(config['format']);
-                            break;
-                        }
-                        componentName = hasKey('enum') ? 'SuperSelect' : 'SuperText';
-                        componentName = widget ? this.getWidgetComponent(widget) : componentName;
-                        break;
-                    case 'array':
-                        componentName = widget ? this.getWidgetComponent(widget) : 'SuperSelect';
-                        break;
-                    case 'boolean':
-                        componentName = widget ? this.getWidgetComponent(widget) : 'SuperCheckbox';
-                        break;
-                    case 'null':
-                    case 'object':
-                    case 'integer':
-                    default:
-                        componentName = 'SuperText';
-                }
-
-                if (!inputs[componentName]) {
-                    console.warn(`component '${componentName}' not available`)
-                    componentName = 'SuperText';
-                }
-
-                return inputs[componentName];
-            },
-            getWidgetComponent(widget) {
-                switch (widget) {
-                    case 'date':
-                    case 'date-time':
-                    case 'time':
-                        return 'SuperDate';
-                    case 'switch':
-                        return 'SuperSwitch';
-                    case 'radio':
-                        return 'SuperRadio';
-                    case 'checkbox':
-                        return 'SuperCheckbox';
-                    case 'textarea': 
-                        return 'SuperTextarea';
-                    default:
-                        return 'SuperText';
-                }
-            },
-            getFieldProps(name, conf) {
-                const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
-                const config = _.clone(conf);
-                
-                // get ui props
-                const uiProps = {};
-                Object.keys(config).map((key) => {
-                    if (key.includes('ui:')) {
-                        const val = config[key];
-                        delete config[key];
-                        uiProps[key.split(':')[1]] = val;
+            validate() {
+                let isValid = true;
+                this.$refs.fields.map((field) => {
+                    if (field.validate && !field.validate()) {
+                        isValid = false;
                     }
                 });
-                
-                return {
-                    ...config,
-                    items: hasKey(config, 'items') ? config.items.enum : config.enum,
-                    value: hasKey(this.values, name) ? this.values[name] : null,
-                    label: hasKey(config, 'title') ? config.title : _.capitalize(name),
-                    ui: uiProps,
-                };
+
+                return isValid;
             }
         },
     }
@@ -155,8 +91,7 @@
         &__switch,
         &__date {
             display: block;
-            margin: 1em 0;
-        }
+            margin: 2em 0;
 
         &__checkboxes,
         &__switch,
@@ -165,17 +100,39 @@
                 display: inline;
             }
 
+            &:first-child {
+                margin-top: 0;
+            }
+
             > span {
                 display: block;
+                padding-bottom: 0.5em;
+            }
+
+            label > span {
+                display: inline;
             }
         }
 
         &__checkbox > span {
             display: inline;
+            padding-bottom: 0;
         }
     }
 
-    label > span {
-        display: block;
+    fieldset {
+        border: 0;
+        padding: 0.5em 0 0;
+
+        > label {
+            &:not(:last-child) {
+                padding-right: 1.5em;
+            }
+
+            input {
+                margin-right: 1em;
+            }
+        }
+    }
     }
 </style>

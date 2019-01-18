@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Example form",
     "type": "object",
     "properties": {
         "name": {
@@ -15,7 +16,6 @@
         },
         "checkboxes": {
             "type": "array",
-            "title": "Multiple choices",
             "items": {
                 "type": "string",
                 "enum": [
@@ -43,7 +43,7 @@
             },
             "ui:widget": "switch"
         },
-        "select": {
+        "choice": {
             "type": "array",
             "title": "Choice list",
             "items": {
@@ -79,6 +79,16 @@
             "type": "string",
             "title": "Birthdate",
             "format": "date"
+        },
+        "year": {
+            "type": "number",
+            "title": "Year",
+            "ui:widget": "year"
+        },
+        "month": {
+            "type": "number",
+            "title": "Month",
+            "ui:widget": "month"
         },
         "comments": {
             "type": "string",

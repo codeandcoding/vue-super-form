@@ -2,12 +2,13 @@
     <label class="form__text">
         <span>{{ this.label }}</span>
         <input 
-            v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
-            :value="this.value"
-            :type="this.type" 
-            :id="this.id" 
+            v-on:input="e => this.onChange(e.target.value)" 
+            :value="inputValue"
+            type="text"
+            :id="this.id"
             :placeholder="this.placeholder"
             :name="this.name" />
+        <field-error :errors="this.validationErrors" />
     </label>
 </template>
 
@@ -15,19 +16,28 @@
     import Vue from 'vue';
     import _ from 'lodash';
     import inputProps from '../inputProps';
+    import { validationMixin } from '../validationHelper';
 
     export default {
         name: 'SuperText',
+        mixins: [validationMixin],
         props: _.assign({
             id: {
                 String,
                 required: false
-            }, 
-            type: {
-                // The value must match one of these strings
-                validator: value => ['text', 'password'].indexOf(value) !== -1,
             }
         }, inputProps),
+        data() {
+            return {
+                inputValue: this.value,
+            }
+        },
+        methods: {
+            onChange(value) {
+                this.inputValue = value;
+                this.$emit('onChange', this.name, value);
+            },
+        },
     }
 </script>
 
