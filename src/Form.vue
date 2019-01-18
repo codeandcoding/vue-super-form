@@ -43,7 +43,7 @@
                 const fields = this.schema.properties;
                 return Object.keys(fields).map((name) => {
                     const config = fields[name];
-                    const props = getFieldProps(name, config, this.values);
+                    const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);
                 });
             },

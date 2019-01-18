@@ -1,4 +1,5 @@
 import * as inputs from './';
+import _ from 'lodash';
 import moment from 'moment';
 
 function getUiProps(config) {
@@ -84,14 +85,18 @@ function getNumberRange(min, max, reverse=false) {
     return reverse ? _.reverse(numbers) : numbers;
 };
 
-export function getFieldProps(name, conf, values={}) {
+export function getFieldProps(name, conf, values={}, translations={}) {
     const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
     const config = _.clone(conf);
+
+    const trans = hasKey(translations, name) ? translations[name] : null;
+    const label = trans && hasKey(trans, 'title') ? trans.title : null;
+    let itemLabels = trans && hasKey(trans, 'items') ? trans.items : null;
 
     const uiProps = getUiProps(config);
 
     let defaultValue = null;
-    let items = [];
+    let items = null;
     switch(uiProps.widget) {
         case 'year':
             defaultValue = moment().year();
@@ -99,6 +104,7 @@ export function getFieldProps(name, conf, values={}) {
             break;
         case 'month':
             items = getNumberRange(1, 12);
+            itemLabels = hasKey(translations, 'months') ? _.concat([''], translations.months) : itemLabels;
             break;
         default:
             items = hasKey(config, 'items') ? config.items.enum : config.enum;
@@ -107,9 +113,10 @@ export function getFieldProps(name, conf, values={}) {
     return {
         name,
         ...config,
-        items: items,
+        items,
+        itemLabels,
         value: hasKey(values, name) ? values[name] : defaultValue,
-        label: hasKey(config, 'title') ? config.title : _.capitalize(name),
+        label: hasKey(config, 'title') ? config.title : label,
         ui: uiProps,
     };
 };

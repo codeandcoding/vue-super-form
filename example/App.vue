@@ -3,12 +3,13 @@
         <pre>
             {{ formData }}
         </pre>
-        <super-form :schema="exampleSchema" v-model="formData" />
+        <super-form :schema="exampleSchema" v-model="formData" :translations="translations" />
     </div>
 </template>
 
 <script>
     import exampleSchema from './example.json';
+    import translations from './en.json';
 
     export default {
         name: 'App',
@@ -24,6 +25,7 @@
                     numberRadio: 1,
                     birthdate: '2018-12-01',
                 },
+                translations: translations.forms,
             }
         },
         mounted() {

@@ -5,6 +5,7 @@
             <option
                 v-for="option in selectItems"
                 :key="option.value"
+                :value="option.value"
                 :selected="option.value == value"
                 :disabled="option.value == null">
             {{ option.label }}
@@ -30,12 +31,18 @@
                 required: false,
                 default: 'string',
             },
+            itemLabels: {
+                type: [Object, Array],
+                required: false,
+            },
         }, inputProps),
         computed: {
             selectItems() {
+                const getLabel = (key) => this.itemLabels && 
+                    Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;
                 const items = this.items.map(item => ({
                     value: item,
-                    label: item,
+                    label: getLabel(item),
                 }));
 
                 // add default item

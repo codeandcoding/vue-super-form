@@ -27,12 +27,18 @@
                 type: Array,
                 required: true,
             },
+            itemLabels: {
+                type: Object,
+                required: false,
+            },
         }, inputProps),
         computed: {
             selectItems() {
+                const getLabel = (key) => this.itemLabels && 
+                    Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;
                 return this.items.map(item => ({
                     value: item,
-                    label: item,
+                    label: getLabel(item),
                 }));
             }
         },
