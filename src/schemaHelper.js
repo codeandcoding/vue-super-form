@@ -85,6 +85,16 @@ function getNumberRange(min, max, reverse=false) {
     return reverse ? _.reverse(numbers) : numbers;
 };
 
+function getValidationRules(config) {
+    const rules = [config.type];
+    
+    if (config.required) {
+        rules.push('required');
+    }
+    
+    return rules;
+}
+
 export function getFieldProps(name, conf, values={}, translations={}) {
     const hasKey = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
     const config = _.clone(conf);
@@ -118,6 +128,7 @@ export function getFieldProps(name, conf, values={}, translations={}) {
         value: hasKey(values, name) ? values[name] : defaultValue,
         label: hasKey(config, 'title') ? config.title : label,
         ui: uiProps,
+        rules: getValidationRules(config),
     };
 };
 

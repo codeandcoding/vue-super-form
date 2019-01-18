@@ -3,7 +3,8 @@
         <h1 class="form__title">{{ this.title }}</h1>
         <form class="form">
             <component
-                v-for="field in fields" 
+                v-for="field in fields"
+                ref="fields"
                 :key="field.key"
                 :is="field.component"
                 v-on:onChange="onChange"
@@ -43,6 +44,12 @@
                 const fields = this.schema.properties;
                 return Object.keys(fields).map((name) => {
                     const config = fields[name];
+
+                    // add 'required' rule
+                    if (this.schema.required.includes(name)) {
+                        config.required = true;
+                    }
+                    
                     const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);
                 });
@@ -56,6 +63,16 @@
                 this.values[name] = val;
                 this.$emit('input', _.clone(this.values))
             },
+            validate() {
+                let isValid = true;
+                this.$refs.fields.map((field) => {
+                    if (field.validate && !field.validate()) {
+                        isValid = false;
+                    }
+                });
+
+                return isValid;
+            }
         },
     }
 </script>

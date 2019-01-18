@@ -7,11 +7,12 @@
                     type="radio"
                     :name="name"
                     :id="item.label"
-                    :checked="value == item.value"
+                    :checked="inputValue == item.value"
                     v-on:input="e => onChange(item.value)" />
                 <span>{{ item.label }}</span>
             </label>
         </fieldset>
+        <field-error :errors="this.validationErrors" />
     </div>
 </template>
 
@@ -19,9 +20,11 @@
     import Vue from 'vue';
     import _ from 'lodash';
     import inputProps from '../inputProps';
+    import { validationMixin } from '../validationHelper';
 
     export default {
         name: 'SuperRadio',
+        mixins: [validationMixin],
         props: _.assign({
             items: {
                 type: Array,
@@ -32,6 +35,11 @@
                 required: false,
             },
         }, inputProps),
+        data() {
+            return {
+                inputValue: this.value,
+            }
+        },
         computed: {
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
@@ -44,6 +52,7 @@
         },
         methods: {
             onChange(value) {
+                this.inputValue = value;
                 this.$emit('onChange', this.name, value);
             }
         }

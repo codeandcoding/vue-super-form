@@ -3,7 +3,10 @@
         <pre>
             {{ formData }}
         </pre>
-        <super-form :schema="exampleSchema" v-model="formData" :translations="translations" />
+        <div>
+            <super-form ref="form" :schema="exampleSchema" v-model="formData" :translations="translations" />
+            <input type="submit" value="Submit form" @click="submit" />
+        </div>
     </div>
 </template>
 
@@ -30,7 +33,14 @@
         },
         mounted() {
             console.log('example app mounted!');
-        }
+        },
+        methods: {
+            submit(e) {
+                e.preventDefault();
+                const formIsValid = this.$refs.form.validate();
+                console.warn(formIsValid);
+            }
+        },
     };
 </script>
 
@@ -54,6 +64,10 @@
 
         > div {
             overflow: auto;
+
+            input[type=submit] {
+                margin: 1em 0 2em;
+            }
         }
     }
 </style>

@@ -7,11 +7,12 @@
                 <input
                     type="checkbox"
                     :name="name"
-                    :checked="value.includes(item.value)"
+                    :checked="inputValue.includes(item.value)"
                     v-on:input="e => onChange(item.value, e.target.checked)" />
                 <span>{{ item.label }}</span>
             </label>
         </fieldset>
+        <field-error :errors="this.validationErrors" />
     </div>
     <label v-else class="form__checkbox">
         <!-- single checkbox -->
@@ -20,6 +21,7 @@
             :name="name" 
             v-on:input="e => onChange(null, e.target.checked)" />
         <span>{{ this.label }}</span>
+        <field-error :errors="this.validationErrors" />
     </label>
 </template>
 
@@ -27,9 +29,11 @@
     import Vue from 'vue';
     import _ from 'lodash';
     import inputProps from '../inputProps';
+    import { validationMixin } from '../validationHelper';
 
     export default {
         name: 'SuperCheckbox',
+        mixins: [validationMixin],
         props: _.assign({
             items: {
                 type: Array,
@@ -40,6 +44,11 @@
                 required: false,
             },
         }, inputProps),
+        data() {
+            return {
+                inputValue: this.value,
+            }
+        },
         computed: {
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
@@ -53,7 +62,7 @@
         methods: {
             onChange(val, checked) {
                 const value = val ? this.getMultiValues(val, checked) : checked;
-
+                this.inputValue = value;
                 this.$emit('onChange', this.name, value);
             },
             getMultiValues(val, checked) {

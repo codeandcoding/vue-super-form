@@ -6,11 +6,12 @@
                 v-for="option in selectItems"
                 :key="option.value"
                 :value="option.value"
-                :selected="option.value == value"
+                :selected="option.value == inputValue"
                 :disabled="option.value == null">
             {{ option.label }}
             </option>
         </select>
+        <field-error :errors="this.validationErrors" />
     </label>
 </template>
 
@@ -18,9 +19,11 @@
     import Vue from 'vue';
     import _ from 'lodash';
     import inputProps from '../inputProps';
+    import { validationMixin } from '../validationHelper';
 
     export default {
         name: 'SuperSelect',
+        mixins: [validationMixin],
         props: _.assign({
             items: {
                 type: Array,
@@ -36,6 +39,11 @@
                 required: false,
             },
         }, inputProps),
+        data() {
+            return {
+                inputValue: this.value,
+            }
+        },
         computed: {
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
@@ -55,9 +63,10 @@
         methods: {
             onChange(val) {
                 const value = this.type === 'number' ? parseInt(val) : val;
+                this.inputValue = value;
                 this.$emit('onChange', this.name, value);
             }
-        }
+        },
     }
 </script>
 
