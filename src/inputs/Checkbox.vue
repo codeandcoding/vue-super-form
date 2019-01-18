@@ -2,14 +2,17 @@
     <div v-if="items" class="form__checkboxes">
         <!-- multiple checkboxes -->
         <span>{{ this.label }}</span>
-        <label v-for="item in selectItems" :key="item.value">
-            <input
-                type="checkbox"
-                :name="name"
-                :checked="value.includes(item.value)"
-                v-on:input="e => onChange(item.value, e.target.checked)" />
-            <span>{{ item.label }}</span>
-        </label>
+        <fieldset>
+            <label v-for="item in selectItems" :key="item.value">
+                <input
+                    type="checkbox"
+                    :name="name"
+                    :checked="inputValue.includes(item.value)"
+                    v-on:input="e => onChange(item.value, e.target.checked)" />
+                <span>{{ item.label }}</span>
+            </label>
+        </fieldset>
+        <field-error :errors="this.validationErrors" />
     </div>
     <label v-else class="form__checkbox">
         <!-- single checkbox -->
@@ -18,6 +21,7 @@
             :name="name" 
             v-on:input="e => onChange(null, e.target.checked)" />
         <span>{{ this.label }}</span>
+        <field-error :errors="this.validationErrors" />
     </label>
 </template>
 
@@ -25,27 +29,40 @@
     import Vue from 'vue';
     import _ from 'lodash';
     import inputProps from '../inputProps';
+    import { validationMixin } from '../validationHelper';
 
     export default {
         name: 'SuperCheckbox',
+        mixins: [validationMixin],
         props: _.assign({
             items: {
                 type: Array,
                 required: false,
             },
+            itemLabels: {
+                type: Object,
+                required: false,
+            },
         }, inputProps),
+        data() {
+            return {
+                inputValue: this.value,
+            }
+        },
         computed: {
             selectItems() {
+                const getLabel = (key) => this.itemLabels && 
+                    Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;
                 return this.items.map(item => ({
                     value: item,
-                    label: item,
+                    label: getLabel(item),
                 }));
             }
         },
         methods: {
             onChange(val, checked) {
                 const value = val ? this.getMultiValues(val, checked) : checked;
-
+                this.inputValue = value;
                 this.$emit('onChange', this.name, value);
             },
             getMultiValues(val, checked) {
@@ -61,7 +78,7 @@
                 }
 
                 return _.uniq(values);
-            }
+            },
         }
     }
 </script>

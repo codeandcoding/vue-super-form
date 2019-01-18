@@ -152,14 +152,12 @@
         &__checkboxes,
         &__checkbox,
         &__radios,
-        &__switch,
         &__date {
             display: block;
             margin: 1em 0;
         }
 
         &__checkboxes,
-        &__switch,
         &__radios {
             label > span {
                 display: inline;
