@@ -2,7 +2,7 @@ import FieldError from './FieldError';
 
 function validateField(rules, value) {
     const errors = [];
-    console.log(rules);
+
     rules.map((rule) => {
         switch(rule) {
             case 'required':
@@ -12,12 +12,8 @@ function validateField(rules, value) {
                 break;
             case 'number':
                 if (isNaN(value)) {
-                    errors.push('number_field')
+                    errors.push('only_number_field')
                 }
-            break;
-            case 'minimum':
-                console.log(rules);
-            
         }
     });
 
