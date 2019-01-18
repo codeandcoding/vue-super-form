@@ -41,7 +41,7 @@
                 // add default item
                 return _.concat({
                     value: null,
-                    label: 'Choose one',
+                    label: this.label,
                 }, items);
             }
         },
