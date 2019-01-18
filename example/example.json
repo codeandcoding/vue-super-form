@@ -34,13 +34,6 @@
         "published": {
             "type": "boolean",
             "title": "Published?",
-            "items": {
-                "type": "string",
-                "enum": [
-                    "yes",
-                    "no"
-                ]
-            },
             "ui:widget": "switch"
         },
         "choice": {

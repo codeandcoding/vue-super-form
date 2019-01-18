@@ -27,7 +27,7 @@
                     ],
                     numberRadio: 1,
                     birthdate: '2018/12/01',
-                    published: 'yes'
+                    published: true,
                 },
                 translations: translations.forms,
             }
