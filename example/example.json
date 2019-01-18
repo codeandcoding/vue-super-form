@@ -74,6 +74,16 @@
             "title": "Birthdate",
             "format": "date"
         },
+        "year": {
+            "type": "number",
+            "title": "Year",
+            "ui:widget": "year"
+        },
+        "month": {
+            "type": "number",
+            "title": "Month",
+            "ui:widget": "month"
+        },
         "comments": {
             "type": "string",
             "title": "Comments",
