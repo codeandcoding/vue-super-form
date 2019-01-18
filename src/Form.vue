@@ -109,7 +109,7 @@
                         return 'SuperRadio';
                     case 'checkbox':
                         return 'SuperCheckbox';
-                    case 'textarea':
+                    case 'textarea': 
                         return 'SuperTextarea';
                     default:
                         return 'SuperText';
@@ -152,12 +152,14 @@
         &__checkboxes,
         &__checkbox,
         &__radios,
+        &__switch,
         &__date {
             display: block;
             margin: 1em 0;
         }
 
         &__checkboxes,
+        &__switch,
         &__radios {
             label > span {
                 display: inline;

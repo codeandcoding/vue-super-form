@@ -6,6 +6,7 @@ import SuperRadio from './inputs/Radio';
 import SuperDate from './inputs/Date';
 import SuperNumber from './inputs/Number';
 import SuperTextarea from './inputs/Textarea';
+import SuperSwitch from './inputs/Switch';
 
 export {
     SuperText,
@@ -15,6 +16,7 @@ export {
     SuperDate,
     SuperNumber,
     SuperTextarea,
+    SuperSwitch,
 };
 
 export default SuperForm;
