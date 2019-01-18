@@ -97,11 +97,15 @@
 
     fieldset {
         border: 0;
-        padding: 0;
+        padding: 0.5em 0 0;
 
         > label {
             &:not(:last-child) {
-                padding-right: 1em;
+                padding-right: 1.5em;
+            }
+
+            input {
+                margin-right: 1em;
             }
         }
     }

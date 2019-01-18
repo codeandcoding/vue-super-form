@@ -4,8 +4,8 @@
         <input 
             v-on:input="e => this.$emit('onChange', this.name, e.target.value)" 
             :value="this.value"
-            :type="this.type" 
-            :id="this.id" 
+            type="text" 
+            :id="this.id"
             :placeholder="this.placeholder"
             :name="this.name" />
     </label>
@@ -22,10 +22,6 @@
             id: {
                 String,
                 required: false
-            }, 
-            type: {
-                // The value must match one of these strings
-                validator: value => ['text', 'password'].indexOf(value) !== -1,
             }
         }, inputProps),
     }
