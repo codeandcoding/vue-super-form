@@ -25,7 +25,7 @@ export const validationMixin = {
         rules: {
             type: Array,
             required: false,
-            default: [],
+            default: () => [],
         },
     },
     data() {

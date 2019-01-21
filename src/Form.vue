@@ -41,8 +41,8 @@
         },
         computed: {
             fields() {
-                const fields = this.schema.properties;
-                return Object.keys(fields).map((name) => {
+                const fields = Object.keys(this.schema).length ? this.schema.properties : null;
+                return fields ? Object.keys(fields).map((name) => {
                     const config = fields[name];
 
                     // add 'required' rule
@@ -52,7 +52,7 @@
                     
                     const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);
-                });
+                }) : [];
             },
             title() {
                 return this.schema.title;

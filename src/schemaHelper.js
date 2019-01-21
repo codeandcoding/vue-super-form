@@ -6,7 +6,9 @@ import moment from 'moment';
 export const formSchemaMixin = {
     mounted() {
         // set initial value
-        this.onChange(this.inputValue || this.defaultValue);
+        const value = this.inputValue || this.defaultValue;
+        this.inputValue = value;
+        this.$emit('onChange', this.name, value);
     },
     props: inputProps,
     data() {
