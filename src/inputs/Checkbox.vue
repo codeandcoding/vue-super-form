@@ -8,7 +8,7 @@
                     type="checkbox"
                     :name="name"
                     :checked="inputValue.includes(item.value)"
-                    v-on:input="e => onChange(item.value, e.target.checked)" />
+                    v-on:input="e => change(item.value, e.target.checked)" />
                 <span>{{ item.label }}</span>
             </label>
         </fieldset>
@@ -16,10 +16,10 @@
     </div>
     <label v-else class="form__checkbox">
         <!-- single checkbox -->
-        <input 
+        <input
             type="checkbox" 
             :name="name" 
-            v-on:input="e => onChange(null, e.target.checked)" />
+            v-on:input="e => change(null, e.target.checked)" />
         <span>{{ this.label }}</span>
         <field-error :errors="this.validationErrors" />
     </label>
@@ -28,13 +28,13 @@
 <script>
     import Vue from 'vue';
     import _ from 'lodash';
-    import inputProps from '../inputProps';
     import { validationMixin } from '../validationHelper';
+    import { formSchemaMixin } from '../schemaHelper';
 
     export default {
         name: 'SuperCheckbox',
-        mixins: [validationMixin],
-        props: _.assign({
+        mixins: [validationMixin, formSchemaMixin],
+        props: {
             items: {
                 type: Array,
                 required: false,
@@ -43,11 +43,6 @@
                 type: Object,
                 required: false,
             },
-        }, inputProps),
-        data() {
-            return {
-                inputValue: this.value,
-            }
         },
         computed: {
             selectItems() {
@@ -60,10 +55,9 @@
             }
         },
         methods: {
-            onChange(val, checked) {
+            change(val, checked) {
                 const value = val ? this.getMultiValues(val, checked) : checked;
-                this.inputValue = value;
-                this.$emit('onChange', this.name, value);
+                this.onChange(value);
             },
             getMultiValues(val, checked) {
                 const values = this.value ? this.value.splice(0) : [];

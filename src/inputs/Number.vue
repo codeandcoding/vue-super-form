@@ -17,14 +17,13 @@
 
 <script>
     import Vue from 'vue';
-    import _ from 'lodash';
-    import inputProps from '../inputProps';
     import { validationMixin } from '../validationHelper';
+    import { formSchemaMixin } from '../schemaHelper';
 
     export default {
         name: 'SuperNumber',
-        mixins: [validationMixin],
-        props: _.assign({
+        mixins: [validationMixin, formSchemaMixin],
+        props: {
             id: {
                 String,
                 required: false,
@@ -36,17 +35,6 @@
             maximum: {
                 Number,
                 required: false,
-            },
-        }, inputProps),
-        data() {
-            return {
-                inputValue: this.value,
-            }
-        },
-        methods: {
-            onChange(value) {
-                this.inputValue = value;
-                this.$emit('onChange', this.name, value);
             },
         },
     }

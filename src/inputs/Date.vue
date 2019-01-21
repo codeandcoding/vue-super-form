@@ -12,37 +12,25 @@
 
 <script>
     import Vue from 'vue';
-    import _ from 'lodash';
     import moment from 'moment';
-    import inputProps from '../inputProps';
     import { validationMixin } from '../validationHelper';
+    import { formSchemaMixin } from '../schemaHelper';
 
     export default {
         name: 'SuperDate',
-        mixins: [validationMixin],
-        props: _.assign({
+        mixins: [validationMixin, formSchemaMixin],
+        props: {
             format: {
                 type: String,
                 required: false,
                 default: 'date',
             },
-        }, inputProps),
-        data() {
-            return {
-                inputValue: this.value,
-            }
         },
         computed: {
             dateValue() {
                 return moment(this.inputValue).format('YYYY-MM-DD');
             }
         },
-        methods: {
-            onChange(value) {
-                this.inputValue = value;
-                this.$emit('onChange', this.name, value);
-            },
-        }
     }
 </script>
 

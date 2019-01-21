@@ -1,7 +1,7 @@
 <template>
     <label class="form__select">
         <span>{{ this.label }}</span>
-        <select :name="name" v-on:input="e => this.onChange(e.target.value)">
+        <select :name="name" v-on:input="e => this.change(e.target.value)">
             <option
                 v-for="option in selectItems"
                 :key="option.value"
@@ -17,14 +17,13 @@
 
 <script>
     import Vue from 'vue';
-    import _ from 'lodash';
-    import inputProps from '../inputProps';
     import { validationMixin } from '../validationHelper';
+    import { formSchemaMixin } from '../schemaHelper';
 
     export default {
         name: 'SuperSelect',
-        mixins: [validationMixin],
-        props: _.assign({
+        mixins: [validationMixin, formSchemaMixin],
+        props: {
             items: {
                 type: Array,
                 required: true,
@@ -38,11 +37,6 @@
                 type: [Object, Array],
                 required: false,
             },
-        }, inputProps),
-        data() {
-            return {
-                inputValue: this.value,
-            }
         },
         computed: {
             selectItems() {
@@ -61,10 +55,9 @@
             }
         },
         methods: {
-            onChange(val) {
+            change(val) {
                 const value = this.type === 'number' ? parseInt(val) : val;
-                this.inputValue = value;
-                this.$emit('onChange', this.name, value);
+                this.onChange(value);
             }
         },
     }

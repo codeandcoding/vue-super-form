@@ -1,6 +1,25 @@
 import * as inputs from './';
 import _ from 'lodash';
+import inputProps from './inputProps';
 import moment from 'moment';
+
+export const formSchemaMixin = {
+    mounted() {
+        console.warn('mounted!!')
+    },
+    props: inputProps,
+    data() {
+        return {
+            inputValue: this.value,
+        }
+    },
+    methods: {
+        onChange(value) {
+            this.inputValue = value;
+            this.$emit('onChange', this.name, value);
+        },
+    }
+}
 
 function getUiProps(config) {
     const uiProps = {};
