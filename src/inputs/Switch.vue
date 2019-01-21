@@ -1,32 +1,39 @@
 <template>
-    <div>
+    <label class="form__switch">
         <span>{{ this.label }}</span>
-        <label>
-            <span :class="switchClass"
-                v-on:click="e => this.onChange(!this.value)"
-            />
-        </label>
-    </div>
+        <div 
+            :class="switchClass"
+            :name="name"
+            v-on:click="e => this.onChange(!inputValue)"
+        />
+        <field-error :errors="this.validationErrors" />
+    </label>
 </template>
 
 <script>
     import Vue from 'vue';
     import _ from 'lodash';
     import inputProps from '../inputProps';
+    import { validationMixin } from '../validationHelper';
 
     export default {
         name: 'SuperSwitch',
         props: inputProps,
-
+        data() {
+            return {
+                inputValue: this.value,
+            }
+        },
         computed: {
             switchClass() {           
                 return this.value ?
-                    'form__switch' : 'form__switch form__switch--off';
+                    'form__initial' : 'form__initial form__initial--inverse';
             }
         },
 
         methods: {
             onChange(value) {
+                this.inputValue = value;
                 this.$emit('onChange', this.name, value);
             }
         }
@@ -35,13 +42,12 @@
 
 <style lang="scss">
         .form {
-            &__switch {
+            &__initial {
                 background-color: green;
-                border-radius: 25px;
-                width: 75px;
-                height: 20px;
+                width: 100px;
+                height: 30px;
 
-                &--off {
+                &--inverse {
                     background-color: red;
                 }
             }
