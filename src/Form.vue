@@ -39,6 +39,14 @@
                 },
             };
         },
+        watch: { 
+            schema(newVal, oldVal) {
+                const newProps = Object.keys(newVal.properties);
+                Object.keys(this.values)
+                    .filter(key => newProps.indexOf(key) < 0)
+                    .map(key => delete this.values[key])
+            },
+        },
         computed: {
             fields() {
                 const fields = Object.keys(this.schema).length ? this.schema.properties : null;
