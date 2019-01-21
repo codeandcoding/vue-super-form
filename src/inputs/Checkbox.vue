@@ -7,7 +7,7 @@
                 <input
                     type="checkbox"
                     :name="name"
-                    :checked="inputValue.includes(item.value)"
+                    :checked="inputValue && inputValue.includes(item.value)"
                     v-on:input="e => change(item.value, e.target.checked)" />
                 <span>{{ item.label }}</span>
             </label>
@@ -45,6 +45,9 @@
             },
         },
         computed: {
+            defaultValue() {
+                return this.items && this.items.length ? [] : false;
+            },
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
                     Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;

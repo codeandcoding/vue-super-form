@@ -32,6 +32,9 @@
             },
         },
         computed: {
+            defaultValue() {
+                return '';
+            },
             height() {
                 return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'height') ? 
                     this.ui.height : 

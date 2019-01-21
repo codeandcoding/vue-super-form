@@ -39,6 +39,9 @@
             },
         },
         computed: {
+            defaultValue() {
+                return this.items[0];
+            },
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
                     Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;
@@ -52,7 +55,7 @@
                     value: null,
                     label: this.label,
                 }, items);
-            }
+            },
         },
         methods: {
             change(val) {

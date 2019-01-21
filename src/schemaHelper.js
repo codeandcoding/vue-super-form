@@ -5,12 +5,18 @@ import moment from 'moment';
 
 export const formSchemaMixin = {
     mounted() {
-        console.warn('mounted!!')
+        // set initial value
+        this.onChange(this.inputValue || this.defaultValue);
     },
     props: inputProps,
     data() {
         return {
             inputValue: this.value,
+        }
+    },
+    computed: {
+        defaultValue() {
+            return null
         }
     },
     methods: {

@@ -37,6 +37,11 @@
                 required: false,
             },
         },
+        computed: {
+            defaultValue() {
+                return this.minimum || 0;
+            }
+        },
     }
 </script>
 

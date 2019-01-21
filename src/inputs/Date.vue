@@ -2,7 +2,7 @@
     <label class="form__date">
         <span>{{ this.label }}</span>
         <input 
-            type="date" 
+            type="date"
             :value="dateValue"
             v-on:input="e => this.onChange(e.target.value)" />
         <field-error :errors="this.validationErrors" />
@@ -27,6 +27,9 @@
             },
         },
         computed: {
+            defaultValue() {
+                return moment().format('YYYY-MM-DD');
+            },
             dateValue() {
                 return moment(this.inputValue).format('YYYY-MM-DD');
             }

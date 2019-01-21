@@ -26,6 +26,11 @@
                 required: false
             }
         },
+        computed: {
+            defaultValue() {
+                return '';
+            },
+        },
     }
 </script>
 
