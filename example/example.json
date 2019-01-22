@@ -88,6 +88,14 @@
             "title": "Comments",
             "ui:widget": "textarea",
             "ui:height": 5     
+        },
+        "accounts": {
+            "type": "array",
+            "title": "Iban",
+            "items": {
+                "type": "string"
+            },
+            "ui:widget": "input"
         }
     },
     "required": ["name", "age"]
