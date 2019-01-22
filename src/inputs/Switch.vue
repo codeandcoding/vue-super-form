@@ -33,7 +33,6 @@
                     'form__switch' : 'form__switch form__switch--off';
             }
         },
-
         methods: {
             onChange(value) {
                 this.inputValue = value;
@@ -46,14 +45,14 @@
 <style lang="scss">
     .form {
         &__switch {
-            & > div:nth-of-type(1) {
+            > div:first-of-type {
                 background-color: green;
                 width: 100px;
                 height: 30px;
             }
 
             &--off {
-                & > div:nth-of-type(1) {
+                > div:first-of-type {
                     background-color: red;
                 }
             }
