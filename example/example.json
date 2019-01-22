@@ -6,7 +6,8 @@
         "name": {
             "type": "string",
             "title": "Name",
-            "minLength": 3
+            "minLength": 3,
+            "maxLength": 14
         },
         "age": {
             "type": "number",

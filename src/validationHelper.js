@@ -5,6 +5,20 @@ function validateField(rules, value) {
 
     rules.map((rule) => {
         switch(rule) {
+            case 'minLength':
+                rules.map((rule) =>{
+                    if (value.length < rule.min_length_value) {
+                        errors.push('min_length_field')
+                    }
+                })
+                break;
+            case 'maxLength':
+                rules.map((rule) =>{
+                    if (value.length > rule.max_length_value) {
+                        errors.push('max_length_field')
+                    }
+                })
+                break;
             case 'required':
                 if (!value || value.length < 1) {
                     errors.push('required_field')

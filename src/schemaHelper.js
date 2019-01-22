@@ -119,6 +119,16 @@ function getValidationRules(config) {
         rules.push('required');
     }
     
+    if (config.minLength != null) {
+        let minLength = {min_length_value: config.minLength}
+        rules.push('minLength', minLength)
+    }
+
+    if (config.maxLength != null) {
+        let maxLength = {max_length_value: config.maxLength}
+        rules.push('maxLength', maxLength)
+    }
+
     return rules;
 }
 
