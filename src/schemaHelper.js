@@ -59,6 +59,8 @@ function getWidgetComponent(widget) {
             return 'SuperCheckbox';
         case 'textarea':
             return 'SuperTextarea';
+        case 'input':
+            return 'SuperMulti';
         default:
             return 'SuperText';
     }
