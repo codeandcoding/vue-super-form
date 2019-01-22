@@ -114,7 +114,18 @@ function getNumberRange(min, max, reverse=false) {
 
 function getValidationRules(config) {
     const rules = [config.type];
-    
+
+    if (config.minimum != null) {
+        let minimum = {min_value: config.minimum}
+        rules.push(minimum, 'minimum');
+
+    }
+
+    if (config.maximum != null) {
+        let maximum = {max_value: config.maximum}
+        rules.push(maximum, 'maximum');
+    }
+
     if (config.required) {
         rules.push('required');
     }

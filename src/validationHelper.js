@@ -2,9 +2,11 @@ import FieldError from './FieldError';
 
 function validateField(rules, value) {
     const errors = [];
-
+    //console.log(rules);
     rules.map((rule) => {
+        
         switch(rule) {
+            
             case 'required':
                 if (!value || value.length < 1) {
                     errors.push('required_field')
@@ -14,6 +16,20 @@ function validateField(rules, value) {
                 if (isNaN(value)) {
                     errors.push('only_number_field')
                 }
+                break;
+            case 'minimum':
+                rules.map((rule) => {
+                    if (value < rule.min_value) {
+                        errors.push('minimum_field')
+                    }
+                });
+                break;
+            case 'maximum': 
+                rules.map((rule) => {
+                    if (value > rule.max_value) {
+                        errors.push('maximum_field')
+                    }
+                });
         }
     });
 
