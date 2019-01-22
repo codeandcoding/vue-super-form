@@ -1,8 +1,7 @@
 <template>
     <label :class="switchClass">
         <span>{{ this.label }}</span>
-        <div 
-            :name="name"
+        <div :name="name"
             v-on:click="e => this.onChange(!inputValue)"
         />
         <field-error :errors="this.validationErrors" />
@@ -12,31 +11,19 @@
 <script>
     import Vue from 'vue';
     import _ from 'lodash';
-    import inputProps from '../inputProps';
     import { validationMixin } from '../validationHelper';
+    import { formSchemaMixin } from '../schemaHelper';
 
     export default {
         name: 'SuperSwitch',
-        mixins: [validationMixin],
-        props: inputProps,
-        data() {
-            return {
-                inputValue: this.value,
-            }
-        },
+        mixins: [validationMixin, formSchemaMixin],
         computed: {
             defaultValue() {
                 return false;
             },
             switchClass() {           
-                return this.value ?
+                return this.inputValue ?
                     'form__switch' : 'form__switch form__switch--off';
-            }
-        },
-        methods: {
-            onChange(value) {
-                this.inputValue = value;
-                this.$emit('onChange', this.name, value);
             }
         }
     }

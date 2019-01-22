@@ -101,13 +101,6 @@
             display: block;
             margin: 2em 0;
 
-        &__checkboxes,
-        &__switch,
-        &__radios {
-            label > span {
-                display: inline;
-            }
-
             &:first-child {
                 margin-top: 0;
             }
@@ -141,6 +134,5 @@
                 margin-right: 1em;
             }
         }
-    }
     }
 </style>
