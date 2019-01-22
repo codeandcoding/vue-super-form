@@ -26,7 +26,8 @@
                         'foo', 'fuzz'
                     ],
                     numberRadio: 1,
-                    birthdate: '2018-12-01',
+                    birthdate: '2018/12/01',
+                    published: true,
                 },
                 translations: translations.forms,
             }

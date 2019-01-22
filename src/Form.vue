@@ -96,6 +96,7 @@
         &__checkboxes,
         &__checkbox,
         &__radios,
+        &__switch,
         &__date {
             display: block;
             margin: 2em 0;
