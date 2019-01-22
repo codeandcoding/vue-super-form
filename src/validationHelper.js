@@ -9,8 +9,11 @@ function validateField(rules, value) {
                 if (!value || value.length < 1) {
                     errors.push('required_field')
                 }
+                break;
             case 'number':
-                // TODO: validate number
+                if (isNaN(value)) {
+                    errors.push('only_number_field')
+                }
         }
     });
 
@@ -25,7 +28,7 @@ export const validationMixin = {
         rules: {
             type: Array,
             required: false,
-            default: [],
+            default: () => [],
         },
     },
     data() {
