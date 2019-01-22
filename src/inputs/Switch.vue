@@ -1,8 +1,7 @@
 <template>
-    <label class="form__switch">
+    <label :class="switchClass">
         <span>{{ this.label }}</span>
         <div 
-            :class="switchClass"
             :name="name"
             v-on:click="e => this.onChange(!inputValue)"
         />
@@ -18,6 +17,7 @@
 
     export default {
         name: 'SuperSwitch',
+        mixins: [validationMixin],
         props: inputProps,
         data() {
             return {
@@ -27,7 +27,7 @@
         computed: {
             switchClass() {           
                 return this.value ?
-                    'form__initial' : 'form__initial form__initial--inverse';
+                    'form__switch' : 'form__switch form__switch--off';
             }
         },
 
@@ -41,15 +41,19 @@
 </script>
 
 <style lang="scss">
-        .form {
-            &__initial {
+    .form {
+        &__switch {
+            & > div:nth-of-type(1) {
                 background-color: green;
                 width: 100px;
                 height: 30px;
+            }
 
-                &--inverse {
+            &--off {
+                & > div:nth-of-type(1) {
                     background-color: red;
                 }
             }
+        }
     }
 </style>

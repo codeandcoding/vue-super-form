@@ -1,5 +1,5 @@
 <template>
-    <label class="form__radios">
+    <div class="form__radios">
         <span>{{ this.label }}</span>
         <fieldset>
             <label v-for="item in selectItems" :key="item.value">
@@ -13,7 +13,7 @@
             </label>
         </fieldset>
         <field-error :errors="this.validationErrors" />
-    </label>
+    </div>
 </template>
 
 <script>
