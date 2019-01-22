@@ -3,21 +3,22 @@ import FieldError from './FieldError';
 function validateField(rules, value) {
     const errors = [];
 
-    rules.map((rule) => {
-        switch(rule) {
-            case 'minLength':
-                rules.map((rule) =>{
-                    if (value.length < rule.min_length_value) {
-                        errors.push('min_length_field')
+    Object.keys(rules).map(rule => {
+        switch(rules[rule]) {
+            case 'string':
+                if (typeof value != 'string') {
+                    errors.push('only_string_field')
+                }
+                if (rules.minLength) {
+                    if (value.length < rules.min_length) {
+                        errors.push('minimum_field')
                     }
-                })
-                break;
-            case 'maxLength':
-                rules.map((rule) =>{
-                    if (value.length > rule.max_length_value) {
-                        errors.push('max_length_field')
+                }
+                if (rules.maxLength) {
+                    if (value.length > rules.max_length) {
+                        errors.push('maximum_field')
                     }
-                })
+                }
                 break;
             case 'required':
                 if (!value || value.length < 1) {
@@ -40,7 +41,7 @@ export const validationMixin = {
     },
     props: {
         rules: {
-            type: Array,
+            type: Object,
             required: false,
             default: () => [],
         },

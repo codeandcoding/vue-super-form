@@ -113,20 +113,18 @@ function getNumberRange(min, max, reverse=false) {
 };
 
 function getValidationRules(config) {
-    const rules = [config.type];
-    
-    if (config.required) {
-        rules.push('required');
-    }
-    
-    if (config.minLength != null) {
-        let minLength = {min_length_value: config.minLength}
-        rules.push('minLength', minLength)
-    }
+    const rules = {type: config.type};
 
+    if (config.required) {
+        rules.required = 'required';
+    }
+    if (config.minLength != null) {
+        rules.min_length =  config.minLength;
+        rules.minLength = true;
+    }
     if (config.maxLength != null) {
-        let maxLength = {max_length_value: config.maxLength}
-        rules.push('maxLength', maxLength)
+        rules.max_length = config.maxLength;
+        rules.maxLength = true;
     }
 
     return rules;
