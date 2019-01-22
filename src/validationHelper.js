@@ -3,7 +3,7 @@ import FieldError from './FieldError';
 function validateField(rules, value) {
     const errors = [];
     rules.map((rule) => {
-        switch(rule) {     
+        switch(rule) {
             case 'required':
                 if (!value || value.length < 1) {
                     errors.push('required_field')
