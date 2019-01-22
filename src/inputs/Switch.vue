@@ -25,6 +25,9 @@
             }
         },
         computed: {
+            defaultValue() {
+                return false;
+            },
             switchClass() {           
                 return this.value ?
                     'form__switch' : 'form__switch form__switch--off';
