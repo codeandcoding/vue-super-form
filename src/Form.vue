@@ -54,7 +54,7 @@
                     const config = fields[name];
 
                     // add 'required' rule
-                    if (this.schema.required.includes(name)) {
+                    if (this.schema.required && this.schema.required.includes(name)) {
                         config.required = true;
                     }
                     

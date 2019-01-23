@@ -6,7 +6,7 @@
             :value="inputValue"
             type="text"
             :id="this.id"
-            :placeholder="this.placeholder"
+            :placeholder="placeholder"
             :name="this.name" />
         <field-error :errors="this.validationErrors" />
     </label>

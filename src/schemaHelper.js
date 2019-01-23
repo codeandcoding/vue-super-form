@@ -18,7 +18,11 @@ export const formSchemaMixin = {
     },
     computed: {
         defaultValue() {
-            return null
+            return null;
+        },
+        placeholder() {
+            return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'placeholder') ?
+                this.ui.placeholder : null;
         }
     },
     methods: {

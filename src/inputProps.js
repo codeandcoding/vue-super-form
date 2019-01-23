@@ -8,10 +8,6 @@ export default {
         type: String,
         required: false,
     },
-    placeholder: {
-        type: String,
-        required: false,
-    },
     validation: {
         type: Object,
         required: false,
@@ -20,5 +16,10 @@ export default {
     readonly: {
         type: Boolean,
         default: false,
+    },
+    ui: {
+        type: Object,
+        required: false,
+        default: () => ({}),
     },
 };

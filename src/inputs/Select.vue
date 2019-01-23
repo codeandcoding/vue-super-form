@@ -40,7 +40,7 @@
         },
         computed: {
             defaultValue() {
-                return this.items[0];
+                return null;
             },
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
@@ -53,7 +53,7 @@
                 // add default item
                 return _.concat({
                     value: null,
-                    label: this.label,
+                    label: this.placeholder || this.label,
                 }, items);
             },
         },
