@@ -40,7 +40,7 @@
         },
         computed: {
             defaultValue() {
-                return null;
+                return this.default ? this.default : this.items[0];
             },
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 

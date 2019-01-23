@@ -3,7 +3,14 @@ export default {
         type: String,
         required: true,
     },
-    value: {},
+    value: {
+        type: null,
+        required: false,
+    },
+    default: {
+        type: null,
+        required: false,
+    },
     label: {
         type: String,
         required: false,
