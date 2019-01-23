@@ -32,13 +32,6 @@
             },
             value: {},
         },
-        data() {
-            return {
-                values: {
-                    ...this.value,
-                },
-            };
-        },
         watch: { 
             schema(newVal, oldVal) {
                 const newProps = Object.keys(newVal.properties);
@@ -48,6 +41,11 @@
             },
         },
         computed: {
+            values() {
+                return {
+                    ...this.value,
+                };
+            },
             fields() {
                 const fields = Object.keys(this.schema).length ? this.schema.properties : null;
                 return fields ? Object.keys(fields).map((name) => {

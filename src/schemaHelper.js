@@ -30,6 +30,11 @@ export const formSchemaMixin = {
             this.inputValue = value;
             this.$emit('onChange', this.name, value);
         },
+    },
+    watch: {
+        value: function(newProp) {
+            this.inputValue = newProp;
+        }
     }
 }
 
