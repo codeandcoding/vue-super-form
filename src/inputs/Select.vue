@@ -40,7 +40,11 @@
         },
         computed: {
             defaultValue() {
-                return this.default ? this.default : this.items[0];
+                if (this.default) {
+                    return this.default === 'null' ? null : this.default;
+                }
+
+                return this.items[0];
             },
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
