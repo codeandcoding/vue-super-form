@@ -147,10 +147,16 @@ export function getFieldProps(name, conf, values={}, translations={}) {
         case 'year':
             defaultValue = moment().year();
             items = getNumberRange(2000, defaultValue + 1, true);
+            if (config.enum) {
+                items = items.filter(k => config.enum.includes(k))
+            }
             break;
         case 'month':
             items = getNumberRange(1, 12);
             itemLabels = hasKey(translations, 'months') ? _.concat([''], translations.months) : itemLabels;
+            if (config.enum) {
+                items = items.filter(k => config.enum.includes(k))
+            }
             break;
         default:
             items = hasKey(config, 'items') ? config.items.enum : config.enum;
