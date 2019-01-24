@@ -30,6 +30,11 @@
                 type: Object,
                 required: false,
             },
+            render: {
+                type: Object,
+                required: false,
+                default: () => {},
+            },
             value: {},
         },
         watch: { 
@@ -55,6 +60,8 @@
                     if (this.schema.required && this.schema.required.includes(name)) {
                         config.required = true;
                     }
+
+                    config.render = this.render[name] || null
                     
                     const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);

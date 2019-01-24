@@ -4,7 +4,7 @@
             {{ formData }}
         </pre>
         <div>
-            <super-form ref="form" :schema="exampleSchema" v-model="formData" :translations="translations" />
+            <super-form ref="form" :schema="exampleSchema" v-model="formData" :translations="translations" :render="renderFuncs"/>
             <input type="submit" value="Submit form" @click="submit" />
         </div>
     </div>
@@ -29,6 +29,15 @@
                     birthdate: '2018-12-01',
                 },
                 translations: translations.forms,
+            }
+        },
+        computed: {
+            renderFuncs() {
+                return {
+                    choice: val => {
+                        return `<b>${val.label}</b>`;
+                    }
+                }
             }
         },
         mounted() {

@@ -1,16 +1,20 @@
 <template>
-    <label class="form__select">
+    <label class="form__select" @click="toggleDropdown" @mouseleave="closeDropdown" @mouseenter="preventClose">
         <span>{{ this.label }}</span>
-        <select :name="name" v-on:input="e => this.change(e.target.value)">
-            <option
+        <ul v-if="isOpen">
+            <li
                 v-for="option in selectItems"
+                v-html="render && option.value != null ? render(option) : option.label"
+                :class="option.value == inputValue ? 'selected' : null"
                 :key="option.value"
+                @click="() => option.value != null ? change(option.value) : () => {}"
                 :value="option.value"
                 :selected="option.value == inputValue"
-                :disabled="option.value == null">
-            {{ option.label }}
-            </option>
-        </select>
+                :disabled="option.value == null" />
+        </ul>
+        <div class="form__select-value">
+            {{ inputValue }}
+        </div>
         <field-error :errors="this.validationErrors" />
     </label>
 </template>
@@ -37,6 +41,16 @@
                 type: [Object, Array],
                 required: false,
             },
+            render: {
+                type: Function,
+                required: false,
+            }
+        },
+        data() {
+            return {
+                isOpen: false,
+                closingTimeout: null,
+            };
         },
         computed: {
             defaultValue() {
@@ -65,10 +79,58 @@
             change(val) {
                 const value = this.type === 'number' ? parseInt(val) : val;
                 this.onChange(value);
-            }
+            },
+            toggleDropdown() {
+                this.isOpen = !this.isOpen;
+            },
+            closeDropdown() {
+                this.closingTimeout = setTimeout(() => {
+                    this.isOpen = false;
+                }, 800);
+            },
+            preventClose() {
+                if (this.closingTimeout) {
+                    // cancel closing of menu
+                    clearTimeout(this.closingTimeout);
+                }
+            },
         },
     }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+    .form__select {
+        position: relative;
+    }
+
+    ul,
+    .form__select-value {
+        border: 1px solid grey;
+        padding: 1em;
+        margin: 0;
+        width: 200px;
+        cursor: pointer;
+    }
+
+    ul {
+        list-style: none;
+        position: absolute;
+        background-color: #fff;
+        padding: 0;
+        z-index: 90;
+
+        > li {
+            display: block;
+            padding: 1em;
+
+            &:hover {
+                background-color: lightgray;
+            }
+
+            &.selected {
+                color: grey;
+                cursor: default;
+            }
+        }
+    }
 </style>
