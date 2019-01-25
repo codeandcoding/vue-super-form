@@ -11,7 +11,7 @@ function validateField(rules, value) {
                 }
                 break;
             case 'number':
-                if (isNaN(value)) {
+                if (value !== null && isNaN(value)) {
                     errors.push('only_number_field')
                 }
         }
@@ -30,6 +30,11 @@ export const validationMixin = {
             required: false,
             default: () => [],
         },
+        validationLabels: {
+            type: Object,
+            required: false,
+            default: () => ({}),
+        }
     },
     data() {
         return {
@@ -39,7 +44,12 @@ export const validationMixin = {
     methods: {
         validate() {
             this.validationErrors = validateField(this.rules, this.inputValue);
-            return this.validationErrors.length > 0;
+            return this.validationErrors.length < 1;
         }
-    }
+    },
+    watch: {
+        value: function(newVal) {
+            this.validationErrors = [];
+        },
+    },
 }

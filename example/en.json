@@ -29,6 +29,9 @@
             "October",
             "November",
             "December"
-        ]
+        ],
+        "validation": {
+            "required_field": "Field is required"
+        }
     }
 }

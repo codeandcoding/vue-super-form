@@ -8,7 +8,7 @@
             :id="this.id"
             :placeholder="placeholder"
             :name="this.name" />
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
 

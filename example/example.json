@@ -91,6 +91,6 @@
             "ui:height": 5     
         }
     },
-    "required": ["name", "age"]
+    "required": ["name", "age", "year"]
 }
   

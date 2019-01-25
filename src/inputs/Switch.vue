@@ -4,7 +4,7 @@
         <div :name="name"
             v-on:click="e => this.onChange(!inputValue)"
         />
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
 

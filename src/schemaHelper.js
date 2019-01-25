@@ -145,8 +145,7 @@ export function getFieldProps(name, conf, values={}, translations={}) {
     let items = null;
     switch(uiProps.widget) {
         case 'year':
-            defaultValue = moment().year();
-            items = getNumberRange(2000, defaultValue + 1, true);
+            items = getNumberRange(2000, moment().year() + 1, true);
             if (config.enum) {
                 items = items.filter(k => config.enum.includes(k))
             }
@@ -171,6 +170,7 @@ export function getFieldProps(name, conf, values={}, translations={}) {
         label: hasKey(config, 'title') ? config.title : label,
         ui: uiProps,
         rules: getValidationRules(config),
+        validationLabels: hasKey(translations, 'validation') ? translations.validation : {},
     };
 };
 

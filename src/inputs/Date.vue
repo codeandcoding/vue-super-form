@@ -5,7 +5,7 @@
             type="date"
             :value="dateValue"
             v-on:input="e => this.onChange(e.target.value)" />
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
         <!-- TODO: add fallback for IE -->
     </label>
 </template>
