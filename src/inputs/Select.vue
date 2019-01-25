@@ -76,7 +76,7 @@
             },
             displayValue() {
                 const value = this.inputValue || null;
-                const selected = this.selectItems.filter(item => item.value === value);
+                const selected = this.selectItems.filter(item => item.value == value);
                 return selected.length > 0 ? selected[0].label : value;
             }
         },
