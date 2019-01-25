@@ -36,7 +36,7 @@
             renderFuncs() {
                 return {
                     choice: val => {
-                        return `<b>${val.label}</b>`;
+                        return `<b>${val.label}</b></br><small>with extra</small>`;
                     }
                 }
             }

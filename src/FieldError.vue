@@ -1,5 +1,5 @@
 <template>
-    <div class="form__error">
+    <div class="form__error" v-if="errors.length">
         <span v-for="(label, i) in this.errorLabels" :key="i">
             {{ label }}
         </span>
