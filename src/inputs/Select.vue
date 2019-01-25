@@ -1,7 +1,7 @@
 <template>
     <label class="form__select" @click="toggleDropdown" @mouseleave="closeDropdown" @mouseenter="preventClose">
         <span>{{ this.label }}</span>
-        <ul v-if="isOpen">
+        <ul v-if="isOpen" class="form__select-options">
             <li
                 v-for="option in selectItems"
                 v-html="render && option.value != null ? render(option) : option.label"
@@ -13,14 +13,15 @@
                 :disabled="option.value == null" />
         </ul>
         <div class="form__select-value">
-            {{ inputValue }}
+            {{ displayValue }}
         </div>
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
 
 <script>
     import Vue from 'vue';
+    import _ from 'lodash';
     import { validationMixin } from '../validationHelper';
     import { formSchemaMixin } from '../schemaHelper';
 
@@ -54,17 +55,13 @@
         },
         computed: {
             defaultValue() {
-                if (this.default) {
-                    return this.default === 'null' ? null : this.default;
-                }
-
-                return this.items[0];
+                return this.default || null;
             },
             selectItems() {
                 const getLabel = (key) => this.itemLabels && 
                     Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;
                 const items = this.items.map(item => ({
-                    value: item,
+                    value: _.camelCase(item),
                     label: getLabel(item),
                 }));
 
@@ -74,6 +71,11 @@
                     label: this.placeholder || this.label,
                 }, items);
             },
+            displayValue() {
+                const value = this.inputValue || null;
+                const selected = this.selectItems.filter(item => item.value === value);
+                return selected.length > 0 ? selected[0].label : value;
+            }
         },
         methods: {
             change(val) {
@@ -90,7 +92,7 @@
             },
             preventClose() {
                 if (this.closingTimeout) {
-                    // cancel closing of menu
+                    // cancel closing of dropdown
                     clearTimeout(this.closingTimeout);
                 }
             },
@@ -103,16 +105,17 @@
         position: relative;
     }
 
-    ul,
+    .form__select-options,
     .form__select-value {
         border: 1px solid grey;
         padding: 1em;
         margin: 0;
         width: 200px;
         cursor: pointer;
+        min-height: 3.5em;
     }
 
-    ul {
+    .form__select-options {
         list-style: none;
         position: absolute;
         background-color: #fff;

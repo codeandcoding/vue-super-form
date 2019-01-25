@@ -61,7 +61,8 @@
                         config.required = true;
                     }
 
-                    config.render = this.render[name] || null
+                    // custom field render
+                    config.render = this.render && this.render[name] ? this.render[name] : null;
                     
                     const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);
