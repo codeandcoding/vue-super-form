@@ -1,30 +1,35 @@
 <template>
-    <label class="form__date">
+    <div class="form__date">
         <span>{{ this.label }}</span>
-        <input 
-            type="date"
-            :value="dateValue"
-            v-on:input="e => this.onChange(e.target.value)" />
+        <datepicker v-on:input="change" :value="dateValue" />
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
-        <!-- TODO: add fallback for IE -->
-    </label>
+    </div>
 </template>
 
 <script>
     import Vue from 'vue';
     import moment from 'moment';
+    import Datepicker from 'vuejs-datepicker';
     import { validationMixin } from '../validationHelper';
     import { formSchemaMixin } from '../schemaHelper';
 
     export default {
         name: 'SuperDate',
         mixins: [validationMixin, formSchemaMixin],
+        components: {
+            Datepicker,
+        },
         props: {
             format: {
                 type: String,
                 required: false,
                 default: 'date',
             },
+            dateFormat: {
+                type: String,
+                required: false,
+                default: 'YYYY-MM-DD',
+            }
         },
         computed: {
             defaultValue() {
@@ -32,6 +37,12 @@
             },
             dateValue() {
                 return moment(this.inputValue).format('YYYY-MM-DD');
+            }
+        },
+        methods: {
+            change(newDate) {
+                const date = moment(newDate);
+                this.onChange(date.format(this.dateFormat))
             }
         },
     }
