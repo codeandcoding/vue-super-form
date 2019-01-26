@@ -1,7 +1,12 @@
 <template>
     <div class="form__date">
         <span>{{ this.label }}</span>
-        <datepicker v-on:input="change" :value="dateValue" :format="displayFormat" />
+        <datepicker 
+            v-on:input="change" 
+            :value="dateValue" 
+            :format="displayFormat" 
+            input-class="form__date-field"
+            calendar-class="form__calendar" />
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </div>
 </template>
@@ -53,5 +58,10 @@
     }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+    .form {
+        &__date,
+        &__date-field,
+        &__calendar {}
+    }
 </style>
