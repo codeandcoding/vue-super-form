@@ -89,7 +89,7 @@
             "ui:widget": "textarea",
             "ui:height": 5     
         },
-        "accounts": {
+        "ibans": {
             "type": "array",
             "title": "Iban",
             "items": {

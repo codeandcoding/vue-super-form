@@ -23,8 +23,8 @@ export const formSchemaMixin = {
     },
     methods: {
         onChange(value) {
-            this.inputValue = value;
-            this.$emit('onChange', this.name, value);
+            this.inputValue = value;                
+            this.$emit('onChange', this.isMulti ? this.identifier: this.name, value);
         },
     }
 }

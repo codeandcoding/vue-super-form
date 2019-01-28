@@ -27,6 +27,7 @@
                     ],
                     numberRadio: 1,
                     birthdate: '2018-12-01',
+                    ibans: ['iban1'],
                 },
                 translations: translations.forms,
             }
