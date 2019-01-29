@@ -95,7 +95,7 @@
             "items": {
                 "type": "string"
             },
-            "ui:widget": "input"
+            "ui:widget": "inputs"
         }
     },
     "required": ["name", "age"]

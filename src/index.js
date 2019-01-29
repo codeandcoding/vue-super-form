@@ -16,7 +16,7 @@ export {
     SuperDate,
     SuperNumber,
     SuperTextarea,
-    SuperMulti
+    SuperMulti,
 };
 
 export default SuperForm;

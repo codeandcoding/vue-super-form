@@ -1,5 +1,5 @@
 <template>
-    <div class="form__radios">
+    <div class="form__multi">
         <span>{{ this.label }}</span>
         <div v-for="item in inputValue" :key="item.key"> 
             <component
@@ -29,9 +29,9 @@
         name: 'SuperMulti',
         mixins: [validationMixin, formSchemaMixin],
         mounted() {            
-            this.inputValue = this.inputValue ? this.inputValue.map((val, i) => (
-                this.itemObjectGenerator(val, i)
-            )) : [];
+            this.inputValue = this.inputValue ? this.inputValue.map((val, i) => 
+                this.itemFormatter(val, i)
+            ) : [];
         },
         computed: {
             defaultValue() {
@@ -42,9 +42,9 @@
             }
         },
         methods: {
-            change(identifier, value) {                
+            change(name, value) {                
                 let newItems = this.inputValue.map(item =>
-                    item.key == identifier ? item['value'] = value: item['value']
+                    item.name == name ? item['value'] = value: item['value']
                 )
 
                 this.$emit('onChange', this.name, newItems);                
@@ -52,17 +52,19 @@
             addNew(e) {
                 e.preventDefault();
 
-                return this.inputValue[this.inputValue.length -1].value.length > 0 &&
-                    this.inputValue.push(this.itemObjectGenerator('', this.inputValue.length));
+                return this.inputValue[this.inputValue.length - 1].value.length > 0 &&
+                    this.inputValue.push(this.itemFormatter('', this.inputValue.length));
                     this.$emit('onChange', this.name, this.inputValue.map( item => item.value ));                   
             },
             removeInput(e, identifier) {
                 e.preventDefault();
 
-                this.inputValue = this.inputValue.filter(item => item.key != identifier);
-                this.$emit('onChange', this.name, this.inputValue.map( item => item.value ));                
+                if (this.inputValue.length > 1) {
+                    this.inputValue = this.inputValue.filter(item => item.key != identifier);
+                    this.$emit('onChange', this.name, this.inputValue.map( item => item.value ));                
+                }
             },
-            itemObjectGenerator(val, i) {
+            itemFormatter(val, i) {
                 return { 
                   key: Math.random().toString(36).substring(7), 
                   props: this.items, 

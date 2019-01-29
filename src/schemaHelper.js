@@ -24,7 +24,7 @@ export const formSchemaMixin = {
     methods: {
         onChange(value) {
             this.inputValue = value;                
-            this.$emit('onChange', this.isMulti ? this.identifier: this.name, value);
+            this.$emit('onChange', this.name, value);
         },
     }
 }
@@ -59,7 +59,7 @@ function getWidgetComponent(widget) {
             return 'SuperCheckbox';
         case 'textarea':
             return 'SuperTextarea';
-        case 'input':
+        case 'inputs':
             return 'SuperMulti';
         default:
             return 'SuperText';

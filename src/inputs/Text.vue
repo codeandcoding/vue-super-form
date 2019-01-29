@@ -24,14 +24,6 @@
             id: {
                 String,
                 required: false
-            },
-            isMulti: {
-                Boolean,
-                required: false
-            },
-            identifier: {
-                String,
-                required: false
             }
         },
         computed: {
