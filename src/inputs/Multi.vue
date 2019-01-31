@@ -30,7 +30,7 @@
         mixins: [validationMixin, formSchemaMixin],
         mounted() {            
             this.inputValue = this.inputValue ? this.inputValue.map((val, i) => 
-                this.itemFormatter(val, i)
+                this.inputItemFormatter(val, i)
             ) : [];
         },
         computed: {
@@ -53,7 +53,7 @@
                 e.preventDefault();
 
                 return this.inputValue[this.inputValue.length - 1].value.length > 0 &&
-                    this.inputValue.push(this.itemFormatter('', this.inputValue.length));
+                    this.inputValue.push(this.inputItemFormatter('', this.inputValue.length));
                     this.$emit('onChange', this.name, this.inputValue.map( item => item.value ));                   
             },
             removeInput(e, identifier) {
@@ -64,7 +64,7 @@
                     this.$emit('onChange', this.name, this.inputValue.map( item => item.value ));                
                 }
             },
-            itemFormatter(val, i) {
+            inputItemFormatter(val, i) {
                 return { 
                   key: Math.random().toString(36).substring(7), 
                   props: this.items, 
