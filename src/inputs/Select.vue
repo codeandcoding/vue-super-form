@@ -1,7 +1,7 @@
 <template>
     <label 
         :class="readonly ? 'form__select form__select--disabled' : 'form__select'"
-        @click="!readonly ? toggleDropdown : () => {}"
+        @click="toggleDropdown"
         @mouseleave="delayedClose" 
         @mouseenter="preventClose"
         v-click-outside="close">
@@ -86,7 +86,9 @@
                 this.onChange(value);
             },
             toggleDropdown() {
-                this.isOpen = !this.isOpen;
+                if (!this.readonly) {
+                    this.isOpen = !this.isOpen;
+                }
             },
             close() {
                 this.isOpen = false;
