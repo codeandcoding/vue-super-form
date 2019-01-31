@@ -21,7 +21,7 @@
             :name="name" 
             v-on:input="e => change(null, e.target.checked)" />
         <span>{{ this.label }}</span>
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
 

@@ -11,7 +11,7 @@
             :min="this.minimum"
             :max="this.maximum"
             :readonly="this.readonly" />
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
 

@@ -6,7 +6,8 @@
         "name": {
             "type": "string",
             "title": "Name",
-            "minLength": 3
+            "minLength": 3,
+            "ui:placeholder": "Please type your name"
         },
         "age": {
             "type": "number",
@@ -98,6 +99,6 @@
             "ui:widget": "inputs"
         }
     },
-    "required": ["name", "age"]
+    "required": ["name", "age", "year"]
 }
   

@@ -12,7 +12,7 @@
                 <span>{{ item.label }}</span>
             </label>
         </fieldset>
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </div>
 </template>
 

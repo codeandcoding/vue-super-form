@@ -30,14 +30,12 @@
                 type: Object,
                 required: false,
             },
+            render: {
+                type: Object,
+                required: false,
+                default: () => {},
+            },
             value: {},
-        },
-        data() {
-            return {
-                values: {
-                    ...this.value,
-                },
-            };
         },
         watch: { 
             schema(newVal, oldVal) {
@@ -48,15 +46,23 @@
             },
         },
         computed: {
+            values() {
+                return {
+                    ...this.value,
+                };
+            },
             fields() {
                 const fields = Object.keys(this.schema).length ? this.schema.properties : null;
                 return fields ? Object.keys(fields).map((name) => {
                     const config = fields[name];
 
                     // add 'required' rule
-                    if (this.schema.required.includes(name)) {
+                    if (this.schema.required && this.schema.required.includes(name)) {
                         config.required = true;
                     }
+
+                    // custom field render
+                    config.render = this.render && this.render[name] ? this.render[name] : null;
                     
                     const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);
@@ -96,6 +102,7 @@
         &__checkboxes,
         &__checkbox,
         &__radios,
+        &__switch,
         &__date {
             display: block;
             margin: 2em 0;

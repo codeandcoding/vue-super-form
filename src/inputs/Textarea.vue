@@ -9,7 +9,7 @@
             :name="this.name"
             :readonly="this.readonly">
         </textarea>
-        <field-error :errors="this.validationErrors" />
+        <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
 

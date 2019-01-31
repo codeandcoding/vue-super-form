@@ -3,12 +3,15 @@ export default {
         type: String,
         required: true,
     },
-    value: {},
-    label: {
-        type: String,
+    value: {
+        type: null,
         required: false,
     },
-    placeholder: {
+    default: {
+        type: null,
+        required: false,
+    },
+    label: {
         type: String,
         required: false,
     },
@@ -20,5 +23,10 @@ export default {
     readonly: {
         type: Boolean,
         default: false,
+    },
+    ui: {
+        type: Object,
+        required: false,
+        default: () => ({}),
     },
 };

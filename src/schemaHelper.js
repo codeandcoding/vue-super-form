@@ -18,7 +18,11 @@ export const formSchemaMixin = {
     },
     computed: {
         defaultValue() {
-            return null
+            return null;
+        },
+        placeholder() {
+            return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'placeholder') ?
+                this.ui.placeholder : null;
         }
     },
     methods: {
@@ -26,6 +30,11 @@ export const formSchemaMixin = {
             this.inputValue = value;                
             this.$emit('onChange', this.name, value);
         },
+    },
+    watch: {
+        value: function(newProp) {
+            this.inputValue = newProp;
+        }
     }
 }
 
@@ -138,12 +147,17 @@ export function getFieldProps(name, conf, values={}, translations={}) {
     let items = null;
     switch(uiProps.widget) {
         case 'year':
-            defaultValue = moment().year();
-            items = getNumberRange(2000, defaultValue + 1, true);
+            items = getNumberRange(2000, moment().year() + 1, true);
+            if (config.enum) {
+                items = items.filter(k => config.enum.includes(k))
+            }
             break;
         case 'month':
             items = getNumberRange(1, 12);
             itemLabels = hasKey(translations, 'months') ? _.concat([''], translations.months) : itemLabels;
+            if (config.enum) {
+                items = items.filter(k => config.enum.includes(k))
+            }
             break;
         default:
             items = hasKey(config, 'items') ? config.items.enum : config.enum;
@@ -158,6 +172,7 @@ export function getFieldProps(name, conf, values={}, translations={}) {
         label: hasKey(config, 'title') ? config.title : label,
         ui: uiProps,
         rules: getValidationRules(config),
+        validationLabels: hasKey(translations, 'validation') ? translations.validation : {},
     };
 };
 

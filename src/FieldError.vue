@@ -1,7 +1,7 @@
 <template>
-    <div class="form__error">
-        <span v-for="(error, i) in this.errors" :key="i">
-            {{ error }}
+    <div class="form__error" v-if="errors.length">
+        <span v-for="(label, i) in this.errorLabels" :key="i">
+            {{ label }}
         </span>
     </div>
 </template>
@@ -15,8 +15,19 @@
             errors: {
                 type: Array,
                 required: false,
+                default: () => [],
+            },
+            translations: {
+                type: Object,
+                required: false,
+                default: () => ({}),
             },
         },
+        computed: {
+            errorLabels() {
+                return this.errors.map(e => this.translations[e]);
+            }
+        }
     }
 </script>
 
