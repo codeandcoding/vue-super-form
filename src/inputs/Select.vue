@@ -60,7 +60,8 @@
                 return this.default || null;
             },
             selectItems() {
-                const parseValue = v => this.type === 'number' ? parseInt(v) : _.camelCase(v);
+                const parseStr = v => this.type === 'id' ? v : _.camelCase(v);
+                const parseValue = v => this.type === 'number' ? parseInt(v) : parseStr(v);
                 const getLabel = (key) => this.itemLabels && 
                     Object.prototype.hasOwnProperty.call(this.itemLabels, key) ? this.itemLabels[key] : key;
                 const items = this.items.map(item => ({
