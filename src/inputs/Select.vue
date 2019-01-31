@@ -1,7 +1,7 @@
 <template>
     <label 
         :class="readonly ? 'form__select form__select--disabled' : 'form__select'"
-        @click="readonly ? toggleDropdown : () => {}"
+        @click="!readonly ? toggleDropdown : () => {}"
         @mouseleave="delayedClose" 
         @mouseenter="preventClose"
         v-click-outside="close">
