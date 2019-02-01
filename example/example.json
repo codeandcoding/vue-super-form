@@ -5,10 +5,16 @@
     "properties": {
         "name": {
             "type": "string",
-            "inputType": "password",
             "title": "Name",
             "minLength": 3,
             "ui:placeholder": "Please type your name"
+        },
+        "password": {
+            "type": "string",
+            "title": "Password",
+            "minLength": 3,
+            "inputType": "password",
+            "ui:placeholder": "Please type your password"
         },
         "age": {
             "type": "number",
