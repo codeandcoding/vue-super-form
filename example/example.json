@@ -5,6 +5,7 @@
     "properties": {
         "name": {
             "type": "string",
+            "inputType": "password",
             "title": "Name",
             "minLength": 3,
             "ui:placeholder": "Please type your name"

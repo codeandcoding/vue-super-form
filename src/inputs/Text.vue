@@ -4,7 +4,7 @@
         <input 
             v-on:input="e => this.onChange(e.target.value)" 
             :value="inputValue"
-            type="text"
+            :type="this.inputType"
             :id="this.id"
             :placeholder="placeholder"
             :name="this.name" />
@@ -22,6 +22,10 @@
         mixins: [validationMixin, formSchemaMixin],
         props: {
             id: {
+                String,
+                required: false
+            },
+            inputType: {
                 String,
                 required: false
             }
