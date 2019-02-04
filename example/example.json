@@ -13,14 +13,14 @@
             "type": "string",
             "title": "Password",
             "minLength": 3,
-            "ui:inputType": "password",
+            "ui:type": "password",
             "ui:placeholder": "Please type your password"
         },
         "email": {
             "type": "string",
             "title": "Email",
             "minLength": 3,
-            "ui:inputType": "email",
+            "ui:type": "email",
             "ui:placeholder": "Please type your email"
         },
         "age": {
