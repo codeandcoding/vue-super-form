@@ -4,7 +4,7 @@
         <input 
             v-on:input="e => this.onChange(e.target.value)" 
             :value="inputValue"
-            :type="this.inputType"
+            :type="inputType"
             :id="this.id"
             :placeholder="placeholder"
             :name="this.name" />
@@ -24,16 +24,16 @@
             id: {
                 String,
                 required: false
-            },
-            inputType: {
-                String,
-                required: false
             }
         },
         computed: {
             defaultValue() {
                 return '';
             },
+            inputType() {
+                return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'inputType') ?
+                    this.ui.inputType : null;
+            }
         },
     }
 </script>
