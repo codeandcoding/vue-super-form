@@ -4,8 +4,8 @@
             {{ formData }}
         </pre>
         <div>
-            <super-form ref="form" :schema="exampleSchema" v-model="formData" :translations="translations" :render="renderFuncs"/>
-            <input type="submit" value="Submit form" @click="submit" />
+            <super-form ref="form" v-on:submitted="submitForm" :schema="exampleSchema" v-model="formData" :translations="translations" :render="renderFuncs"/>
+            <input type="submit" value="Submit form" @click="onClickSubmit" />
         </div>
     </div>
 </template>
@@ -45,10 +45,13 @@
             console.log('example app mounted!');
         },
         methods: {
-            submit(e) {
+            submitForm(data) {
+                // call API
+                console.log('form submitted!', data)
+            },
+            onClickSubmit(e) {
                 e.preventDefault();
-                const formIsValid = this.$refs.form.validate();
-                console.warn(formIsValid);
+                this.$refs.form.submitForm()
             }
         },
     };

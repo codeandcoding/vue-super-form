@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1 class="form__title">{{ this.title }}</h1>
-        <form class="form">
+        <form class="form"
+              v-on:keyup.enter="submitForm">
             <component
                 v-for="field in fields"
                 ref="fields"
@@ -86,6 +87,15 @@
                 });
 
                 return isValid;
+            },
+            submitForm() {                
+                // 1. validate
+                if(!this.validate()) {
+                    return
+                }
+
+                // 2. emit event
+                this.$emit('submitted', this.values);
             }
         },
     }
