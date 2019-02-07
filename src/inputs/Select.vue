@@ -9,13 +9,13 @@
         <ul v-if="isOpen" class="form__select-options">
             <li
                 v-for="option in selectItems.filter(i => i.value)"
-                v-html="render && option.value != null ? render(option) : option.label"
+                v-html="renderOptions && option.value != null ? renderOptions(option) : option.label"
                 :class="option.value == inputValue ? 'selected' : null"
                 :key="option.value"
                 @click="() => option.value != null ? change(option.value) : () => {}" />
         </ul>
         <div class="form__select-value">
-            {{ displayValue }}
+            <span v-html="displayValue" />
         </div>
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
@@ -45,6 +45,10 @@
                 required: false,
             },
             render: {
+                type: Function,
+                required: false,
+            },
+            renderOptions: {
                 type: Function,
                 required: false,
             }
@@ -77,7 +81,8 @@
             displayValue() {
                 const value = this.inputValue || null;
                 const selected = this.selectItems.filter(item => item.value == value);
-                return selected.length > 0 ? selected[0].label : value;
+                const display = selected.length > 0 ? selected[0].label : value;
+                return this.render ? this.render(display) : display;
             }
         },
         methods: {
