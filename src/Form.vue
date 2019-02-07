@@ -95,12 +95,10 @@
                 return isValid;
             },
             submitForm() {                
-                // 1. validate
                 if(!this.validate()) {
                     return
                 }
 
-                // 2. emit event
                 this.$emit('submitted', this.values);
             }
         },
