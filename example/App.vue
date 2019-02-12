@@ -10,7 +10,7 @@
                 v-model="formData" 
                 :translations="translations" 
                 :render="renderFuncs"
-                :renderOptions="renderOptionsFuncs"/>
+                :renderOption="renderOptionsFuncs"/>
             <input type="submit" value="Submit form" @click="submit" />
         </div>
     </div>

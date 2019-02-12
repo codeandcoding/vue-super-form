@@ -35,7 +35,7 @@
                 required: false,
                 default: () => {},
             },
-            renderOptions: {
+            renderOption: {
                 type: Object,
                 required: false,
                 default: () => {},
@@ -68,7 +68,7 @@
 
                     // custom field render
                     config.render = this.render && this.render[name] ? this.render[name] : null;
-                    config.renderOptions = this.renderOptions && this.renderOptions[name] ? this.renderOptions[name] : null;
+                    config.renderOption = this.renderOption && this.renderOption[name] ? this.renderOption[name] : null;
                     
                     const props = getFieldProps(name, config, this.values, this.translations);
                     return getFieldConfig(name, config, props);

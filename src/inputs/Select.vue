@@ -9,7 +9,7 @@
         <ul v-if="isOpen" class="form__select-options">
             <li
                 v-for="option in selectItems.filter(i => i.value)"
-                v-html="renderOptions && option.value != null ? renderOptions(option) : option.label"
+                v-html="renderOption && option.value != null ? renderOption(option) : option.label"
                 :class="option.value == inputValue ? 'selected' : null"
                 :key="option.value"
                 @click="() => option.value != null ? change(option.value) : () => {}" />
@@ -48,7 +48,7 @@
                 type: Function,
                 required: false,
             },
-            renderOptions: {
+            renderOption: {
                 type: Function,
                 required: false,
             }
