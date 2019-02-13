@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="form__title">{{ this.title }}</h1>
-        <form class="form">
+        <form class="form" v-on:keyup.enter="submitForm">
             <component
                 v-for="field in fields"
                 ref="fields"
@@ -36,13 +36,6 @@
                 default: () => {},
             },
             value: {},
-        },
-        mounted() {
-            window.addEventListener('keyup', event => {
-                if (event.keyCode === 13) {
-                    this.submitForm()
-                }
-            })
         },
         watch: { 
             schema(newVal, oldVal) {
@@ -94,7 +87,7 @@
 
                 return isValid;
             },
-            submitForm() {                
+            submitForm() {                            
                 if(!this.validate()) {
                     return
                 }

@@ -46,7 +46,6 @@
         },
         methods: {
             submitForm(data) {
-                // call API
                 console.log('form submitted!', data)
             },
             onClickSubmit(e) {
