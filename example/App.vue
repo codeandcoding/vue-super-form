@@ -4,7 +4,14 @@
             {{ formData }}
         </pre>
         <div>
-            <super-form ref="form" v-on:submitted="submitForm" :schema="exampleSchema" v-model="formData" :translations="translations" :render="renderFuncs"/>
+            <super-form 
+                ref="form" 
+                v-on:submitted="submitForm" 
+                :schema="exampleSchema" 
+                v-model="formData" 
+                :translations="translations" 
+                :render="renderFuncs"
+                :renderOption="renderOptionsFuncs"/>
             <input type="submit" value="Submit form" @click="onClickSubmit" />
         </div>
     </div>
@@ -33,10 +40,17 @@
             }
         },
         computed: {
-            renderFuncs() {
+            renderOptionsFuncs() {
                 return {
                     choice: val => {
                         return `<b>${val.label}</b></br><small>with extra</small>`;
+                    }
+                }
+            },
+            renderFuncs() {
+                return {
+                    choice: val => {
+                        return `<b>${val}</b> is selected`;
                     }
                 }
             }
