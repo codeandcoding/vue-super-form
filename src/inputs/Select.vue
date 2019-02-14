@@ -14,9 +14,7 @@
                 :key="option.value"
                 @click="() => option.value != null ? change(option.value) : () => {}" />
         </ul>
-        <div class="form__select-value">
-            <span v-html="displayValue" />
-        </div>
+        <div class="form__select-value" v-html="displayValue" />
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
