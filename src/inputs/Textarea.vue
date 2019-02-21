@@ -4,11 +4,13 @@
         <textarea
             v-on:input="e => this.onChange(e.target.value)"
             :value="inputValue"
+            :maxlength="maxlength"
             :id="this.id"
             :rows="this.height"
             :name="this.name"
             :readonly="this.readonly">
         </textarea>
+        <span>{{ getTextCount }}</span>
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
@@ -39,6 +41,14 @@
                 return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'height') ? 
                     this.ui.height : 
                     3;
+            },
+            maxlength() {
+                return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'maxlength') &&
+                    this.ui.maxlength
+            },
+            getTextCount() {
+                return this.value &&
+                    this.value.length
             },
         },
     }
