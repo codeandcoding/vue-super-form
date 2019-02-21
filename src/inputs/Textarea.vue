@@ -10,7 +10,7 @@
             :name="this.name"
             :readonly="this.readonly">
         </textarea>
-        <span>{{ getTextCount }}</span>
+        <span>{{ this.ui.maxlength && getTextCount }}</span>
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
@@ -47,8 +47,7 @@
                     this.ui.maxlength
             },
             getTextCount() {
-                return this.value &&
-                    this.value.length
+                    return `${this.value.length}/${this.maxlength}`
             },
         },
     }
