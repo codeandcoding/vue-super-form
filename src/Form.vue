@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="form__title">{{ this.title }}</h1>
+        <h1 v-if="title" class="form__title">{{ this.title }}</h1>
         <form class="form" v-on:keyup.enter="submitForm">
             <component
                 v-for="field in fields"
