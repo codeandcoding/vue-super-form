@@ -10,7 +10,7 @@
             :name="this.name"
             :readonly="this.readonly">
         </textarea>
-        <span>{{ getTextCount }}</span>
+        <span class="form__counter">{{ getTextCount }}</span>
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>
