@@ -102,7 +102,7 @@
             "type": "string",
             "title": "Comments",
             "ui:widget": "textarea",
-            "ui:maxlength": 10
+            "ui:maxLength": 10
         }
     },
     "required": ["name", "age", "year"]
