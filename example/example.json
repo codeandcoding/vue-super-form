@@ -7,7 +7,8 @@
             "type": "string",
             "title": "Name",
             "minLength": 3,
-            "ui:placeholder": "Please type your name"
+            "ui:placeholder": "Please type your name",
+            "ui:disabled": true
         },
         "password": {
             "type": "string",
