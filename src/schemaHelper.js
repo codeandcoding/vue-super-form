@@ -23,6 +23,10 @@ export const formSchemaMixin = {
         placeholder() {
             return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'placeholder') ?
                 this.ui.placeholder : null;
+        },
+        disabled() {
+            return this.ui && Object.prototype.hasOwnProperty.call(this.ui, 'disabled') ?
+            this.ui.disabled : null;
         }
     },
     methods: {
@@ -160,7 +164,7 @@ export function getFieldProps(name, conf, values={}, translations={}) {
         default:
             items = hasKey(config, 'items') ? config.items.enum : config.enum;
     }
-    
+
     return {
         name,
         ...config,
