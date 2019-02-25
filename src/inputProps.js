@@ -20,7 +20,7 @@ export default {
         required: false,
         default: () => ({}),
     },
-    readonly: {
+    readOnly: {
         type: Boolean,
         default: false,
     },

@@ -1,9 +1,10 @@
 <template>
-    <label class="form__text">
+    <label :class="labelClass">
         <span>{{ this.label }}</span>
         <input 
             v-on:input="e => this.onChange(e.target.value)" 
             :value="inputValue"
+            :disabled="readOnly"
             :type="type"
             :id="this.id"
             :placeholder="placeholder"
@@ -27,6 +28,10 @@
             }
         },
         computed: {
+            labelClass() {
+                const className = 'form__text';
+                return this.readOnly ? `${ className } ${ className }--disabled` : className;
+            },
             defaultValue() {
                 return '';
             },

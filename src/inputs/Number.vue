@@ -9,8 +9,7 @@
             :placeholder="this.placeholder"
             :name="this.name"
             :min="this.minimum"
-            :max="this.maximum"
-            :readonly="this.readonly" />
+            :max="this.maximum" />
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
 </template>

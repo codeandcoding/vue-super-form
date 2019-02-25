@@ -1,6 +1,6 @@
 <template>
     <label 
-        :class="readonly ? 'form__select form__select--disabled' : 'form__select'"
+        :class="readOnly ? 'form__select form__select--disabled' : 'form__select'"
         @click="toggleDropdown"
         @mouseleave="delayedClose" 
         @mouseenter="preventClose"
@@ -89,7 +89,7 @@
                 this.onChange(value);
             },
             toggleDropdown() {
-                if (!this.readonly) {
+                if (!this.readOnly) {
                     this.isOpen = !this.isOpen;
                 }
             },

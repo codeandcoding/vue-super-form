@@ -8,7 +8,7 @@
             :id="this.id"
             :rows="this.height"
             :name="this.name"
-            :readonly="this.readonly">
+            :readonly="this.readOnly">
         </textarea>
         <span class="form__counter">{{ getTextCount }}</span>
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />

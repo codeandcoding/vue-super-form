@@ -21,7 +21,8 @@
             "title": "Email",
             "minLength": 3,
             "ui:type": "email",
-            "ui:placeholder": "Please type your email"
+            "ui:placeholder": "Please type your email",
+            "readOnly": true
         },
         "age": {
             "type": "number",
