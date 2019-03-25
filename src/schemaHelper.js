@@ -66,6 +66,8 @@ function getWidgetComponent(widget) {
             return 'SuperRadio';
         case 'checkbox':
             return 'SuperCheckbox';
+        case 'multi':
+            return 'SuperMulti';
         case 'textarea':
             return 'SuperTextarea';
         default:

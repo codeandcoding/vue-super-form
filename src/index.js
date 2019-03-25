@@ -7,6 +7,7 @@ import SuperDate from './inputs/Date';
 import SuperNumber from './inputs/Number';
 import SuperTextarea from './inputs/Textarea';
 import SuperSwitch from './inputs/Switch';
+import SuperMulti from './inputs/Multi';
 
 export {
     SuperText,
@@ -17,6 +18,7 @@ export {
     SuperNumber,
     SuperTextarea,
     SuperSwitch,
+    SuperMulti,
 };
 
 export default SuperForm;

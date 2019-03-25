@@ -116,6 +116,7 @@
         &__checkbox,
         &__radios,
         &__switch,
+        &__multi,
         &__date {
             display: block;
             margin: 2em 0;
@@ -132,6 +133,11 @@
             label > span {
                 display: inline;
             }
+        }
+
+        &__multi-add {
+            display: block;
+            cursor: pointer;
         }
 
         &__checkbox > span {
