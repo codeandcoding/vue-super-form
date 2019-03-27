@@ -43,6 +43,14 @@
             },
             "ui:widget": "checkbox"
         },
+        "bankAccounts": {
+            "type": "array",
+            "title": "Multiple bank accounts",
+            "items": {
+                "type": "string"
+            },
+            "ui:widget": "multi"
+        },
         "newsletter": {
             "type": "boolean",
             "title": "Newsletter"

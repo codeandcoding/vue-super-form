@@ -12,12 +12,14 @@
                 :type="type"
                 :id="id"
                 :name="name" />
-            <span v-if="i > 0 && renderRemove" @click="() => removeInput(i)" v-html="renderRemove()"/>
-            <span v-else-if="i > 0" @click="() => removeInput(i)">X</span>
+            <span v-if="i > 0" @click="e => removeInput(e, i)">
+                <component v-if="removeButton" :is="removeButton" />
+                <button v-else >X</button>
+            </span>
         </span>
-        <a :class="buttonClass" @click="addInput">
-            <span v-if="renderAdd" v-html="renderAdd()" />
-            <span v-else >Add</span>
+        <a :class="buttonClass" @click="e => addInput(e)">
+            <component v-if="addButton" :is="addButton" />
+            <button v-else >Add</button>
         </a>
         <field-error :errors="this.validationErrors" :translations="this.validationLabels" />
     </label>
@@ -36,24 +38,25 @@
                 String,
                 required: false
             },
-            renderAdd: {
-                type: Function,
+            addButton: {
+                type: Object,
                 required: false,
             },
-            renderRemove: {
-                type: Function,
+            removeButton: {
+                type: Object,
                 required: false,
             },
         },
         data() {
             return {
                 inputs: [],
+                fieldIndex: 0,
             };
         },
         mounted() {
             this.inputs = this.inputValue && this.inputValue.length > 0 ? 
-                this.inputValue.map((val, i) => ({ value: val, key: `input-${i}` })) :
-                [{ value: '', key: 'input-0' }];
+                this.inputValue.map((val, i) => ({ value: val, key: this.fieldKey() })) :
+                [{ value: '', key: this.fieldKey() }];
         },
         computed: {
             labelClass() {
@@ -66,7 +69,7 @@
             },
             canAddField() {
                 const lastValue = this.inputs[this.inputs.length - 1];
-                return lastValue && lastValue.value.length > 0;
+                return !this.readOnly && lastValue && lastValue.value.length > 0;
             },
             defaultValue() {
                 return [];
@@ -83,21 +86,29 @@
 
                 this.onChange(this.inputs.map(i => i.value));
             },
-            addInput() {
+            addInput(e) {
+                e.preventDefault();
+
                 if (!this.canAddField) {
                     return;
                 }
 
                 const index = this.inputs.length;
-                this.inputs.push({ value: '', key: `input-${index}` })
+                this.inputs.push({ value: '', key: this.fieldKey() })
             },
-            removeInput(index) {
-                if (!this.inputs[index]) {
+            removeInput(e, index) {
+                e.preventDefault();
+                
+                if (!this.inputs[index] || this.readOnly) {
                     return;
                 }
 
                 this.inputs.splice(index, 1);
                 this.onChange(this.inputs.map(i => i.value));
+            },
+            fieldKey() {
+                this.fieldIndex++;
+                return `input-${this.fieldIndex-1}`;
             }
         }
     }

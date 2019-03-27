@@ -138,6 +138,11 @@
         &__multi-add {
             display: block;
             cursor: pointer;
+
+            &--disabled {
+                color: grey;
+                cursor: default;
+            }
         }
 
         &__checkbox > span {
